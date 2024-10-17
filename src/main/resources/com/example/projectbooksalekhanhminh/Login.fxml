@@ -1,80 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10" prefHeight="506.0" prefWidth="681.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.LoginController">
-    <Label alignment="TOP_RIGHT" prefHeight="20.0" prefWidth="146.0" text="Username:" GridPane.columnIndex="9" GridPane.rowIndex="5">
-        <font>
-            <Font size="14.0" />
-        </font></Label>
-    <TextField fx:id="usernameField" prefHeight="34.0" prefWidth="183.0" GridPane.columnIndex="10" GridPane.rowIndex="5">
-        <font>
-            <Font size="14.0" />
-        </font></TextField>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.LoginController">
 
-    <Label alignment="TOP_RIGHT" prefHeight="20.0" prefWidth="148.0" text="Password:" GridPane.columnIndex="9" GridPane.rowIndex="6">
+    <Text layoutX="291.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="231.13671875">
         <font>
-            <Font size="14.0" />
-        </font></Label>
-    <PasswordField fx:id="passwordField" prefHeight="31.0" prefWidth="183.0" GridPane.columnIndex="10" GridPane.rowIndex="6">
-        <font>
-            <Font size="14.0" />
-        </font></PasswordField>
+            <Font size="58.0" />
+        </font>
+    </Text>
 
-    <Button alignment="CENTER" contentDisplay="CENTER" onAction="#handleLoginButton" prefHeight="30.0" prefWidth="110.0" text="Login" GridPane.columnIndex="10" GridPane.rowIndex="7">
+    <Label layoutX="219.0" layoutY="205.0" prefHeight="17.0" prefWidth="66.0" text="Username:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+    <TextField fx:id="usernameField" layoutX="292.0" layoutY="197.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextField>
+
+    <Label layoutX="221.0" layoutY="255.0" text="Password:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+    <PasswordField fx:id="passwordField" layoutX="292.0" layoutY="247.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </PasswordField>
+
+    <Label layoutX="170.0" layoutY="305.0" text="Confirm Password:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+    <PasswordField fx:id="confirmPasswordField" layoutX="292.0" layoutY="297.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </PasswordField>
+
+    <CheckBox fx:id="showPasswordCheckBox" layoutX="291.0" layoutY="350.0" onAction="#handleShowPassword" text="Show Password" />
+
+    <Button alignment="CENTER" layoutX="352.0" layoutY="396.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="110.0" text="Login">
         <font>
             <Font size="15.0" />
-        </font></Button>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account? " textAlignment="RIGHT" wrappingWidth="149.0" GridPane.columnIndex="10" GridPane.rowIndex="8">
+        </font>
+    </Button>
+
+    <Text layoutX="302.0" layoutY="474.0" text="Don't have an account? ">
         <font>
             <Font size="14.0" />
         </font>
     </Text>
-    <Hyperlink alignment="TOP_RIGHT" prefHeight="28.0" prefWidth="206.0" text="Sign Up" GridPane.columnIndex="10" GridPane.rowIndex="8">
+    <Hyperlink fx:id="registerLink" layoutX="451.0" layoutY="455.0" onAction="#handleRegisterLink" text="Sign Up">
         <font>
             <Font size="14.0" />
         </font>
     </Hyperlink>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="244.13671875" GridPane.columnIndex="10" GridPane.rowIndex="3">
-        <font>
-            <Font size="44.0" />
-        </font>
-    </Text>
-    <columnConstraints>
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints maxWidth="100.0" minWidth="40.0" prefWidth="83.0" />
-        <ColumnConstraints maxWidth="150.0" minWidth="40.0" prefWidth="75.0" />
-        <ColumnConstraints maxWidth="154.0" minWidth="0.0" prefWidth="108.0" />
-        <ColumnConstraints maxWidth="328.0" minWidth="132.0" prefWidth="244.0" />
-        <ColumnConstraints maxWidth="229.0" minWidth="0.0" prefWidth="35.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints maxHeight="97.0" minHeight="0.0" prefHeight="31.0" />
-        <RowConstraints maxHeight="96.0" minHeight="0.0" prefHeight="31.0" />
-        <RowConstraints maxHeight="96.0" minHeight="0.0" prefHeight="34.0" />
-        <RowConstraints maxHeight="96.0" minHeight="0.0" prefHeight="63.0" />
-        <RowConstraints maxHeight="100.0" minHeight="0.0" prefHeight="15.0" />
-        <RowConstraints maxHeight="100.0" minHeight="1.0" prefHeight="40.0" />
-        <RowConstraints maxHeight="100.0" minHeight="1.0" prefHeight="40.0" />
-        <RowConstraints maxHeight="100.0" minHeight="1.0" prefHeight="30.0" />
-        <RowConstraints maxHeight="100.0" minHeight="1.0" prefHeight="30.0" />
-        <RowConstraints maxHeight="101.0" minHeight="1.0" prefHeight="30.0" />
-        <RowConstraints maxHeight="101.0" minHeight="0.0" prefHeight="0.0" />
-        <RowConstraints maxHeight="101.0" minHeight="0.0" prefHeight="0.0" />
-    </rowConstraints>
-</GridPane>
+</AnchorPane>

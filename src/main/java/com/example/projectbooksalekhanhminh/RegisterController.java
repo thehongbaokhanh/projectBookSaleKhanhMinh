@@ -1,16 +1,18 @@
 package com.example.projectbooksalekhanhminh;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Hyperlink;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class LoginController {
+import java.io.IOException;
+
+public class RegisterController {
 
     @FXML
     private TextField usernameField;
@@ -19,39 +21,49 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    private PasswordField confirmPasswordField; // Thêm trường xác nhận mật khẩu
+    private PasswordField confirmPasswordField;
+
+    @FXML
+    private TextField phoneField;
 
     @FXML
     private CheckBox showPasswordCheckBox;
 
     @FXML
-    private Hyperlink registerLink;
-
-    @FXML
-    private void handleLoginButton() {
+    private void handleRegisterButton() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+        String phone = phoneField.getText();
 
-        if (authenticate(username, password)) {
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+        // Kiểm tra số điện thoại
+        if (!isValidPhoneNumber(phone)) {
+            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Phone number must be 10 digits and start with 0.");
+            return;
+        }
+
+        // Logic đăng ký ở đây
+        if (password.equals(confirmPassword)) {
+            // Thực hiện đăng ký
+            showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Welcome " + username + "!");
         } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
+            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Passwords do not match.");
         }
     }
 
-    private boolean authenticate(String username, String password) {
-        return false; // Implement authentication logic here
+    private boolean isValidPhoneNumber(String phone) {
+        return phone.matches("^0\\d{9}$"); // Kiểm tra 10 chữ số bắt đầu bằng 0
     }
 
     @FXML
-    private void handleRegisterLink() {
+    private void handleLoginLink() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
-            Scene signUpScene = new Scene(loader.load());
+            // Tải lại trang đăng nhập
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(signUpScene);
-            stage.setTitle("Sign Up");
-        } catch (Exception e) {
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
