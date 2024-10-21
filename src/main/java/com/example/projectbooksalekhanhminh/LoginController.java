@@ -10,7 +10,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class LoginController {
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class LoginController{
+
+    private int numberOfUsers = 0;
+
+    private User[] users = new User[numberOfUsers];
+
     @FXML
     private TextField usernameField;
 
@@ -29,14 +38,14 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (authenticate(username, password)) {
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+            showAlert(Alert.AlertType.INFORMATION, "Đã đăng nhập thành công.", "Xin chào " + username + "!");
         } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
+            showAlert(Alert.AlertType.ERROR, "Đăng nhập thất bại.", " Tên đăng nhập hoặc mật khẩu không tồn tại.");
         }
     }
 
     private boolean authenticate(String username, String password) {
-        return false; // Implement authentication logic here
+        return false;
     }
 
     @FXML
@@ -73,5 +82,32 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public User[] getUsersInfor(){
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT * FROM users";
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("userID");
+                String userName = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                String role = resultSet.getString("role");
+                User user = new User(id, userName, password, phoneNumber, email, address, role);
+                users[numberOfUsers] = user;
+                numberOfUsers++;
+            }
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return users;
     }
 }
