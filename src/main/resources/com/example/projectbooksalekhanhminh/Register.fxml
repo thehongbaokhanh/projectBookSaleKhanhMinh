@@ -10,67 +10,79 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.RegisterController">
-    <Label layoutX="286.0" layoutY="25.0" prefHeight="76.0" prefWidth="213.0" text="Register" textAlignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.RegisterController">
+    <Label layoutX="332.0" layoutY="40.0" prefHeight="76.0" prefWidth="213.0" text="Sign Up" textAlignment="CENTER">
         <font>
             <Font size="58.0" />
         </font>
     </Label>
 
-    <Label layoutX="205.0" layoutY="159.0" text="Username:">
+    <Label layoutX="249.0" layoutY="197.0" text="Username:">
         <font>
             <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="usernameField" layoutX="277.0" layoutY="151.0" prefHeight="35.0" prefWidth="230.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
+    <TextField fx:id="usernameField" layoutX="323.0" layoutY="189.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font></TextField>
 
-    <Label layoutX="207.0" layoutY="214.0" prefHeight="7.0" prefWidth="62.0" text="Password:">
+    <Label layoutX="253.0" layoutY="249.0" prefHeight="7.0" prefWidth="62.0" text="Password:">
         <font>
             <Font size="14.0" />
         </font>
     </Label>
-    <PasswordField fx:id="passwordField" layoutX="277.0" layoutY="206.0" prefHeight="35.0" prefWidth="230.0">
-      <font>
-         <Font size="14.0" />
-      </font></PasswordField>
+    <PasswordField fx:id="passwordField" layoutX="323.0" layoutY="241.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font></PasswordField>
 
-    <Label layoutX="156.0" layoutY="265.0" text="Confirm Password:">
+    <TextField fx:id="showPasswordField" layoutX="277.0" layoutY="206.0" managed="false" prefHeight="35.0" prefWidth="230.0" visible="false">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextField>
+
+    <Label layoutX="199.0" layoutY="301.0" text="Confirm Password:">
         <font>
             <Font size="14.0" />
         </font>
     </Label>
-    <PasswordField fx:id="confirmPasswordField" layoutX="277.0" layoutY="258.0" prefHeight="35.0" prefWidth="230.0">
-      <font>
-         <Font size="14.0" />
-      </font></PasswordField>
+    <PasswordField fx:id="confirmPasswordField" layoutX="323.0" layoutY="293.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font></PasswordField>
 
-    <Label layoutX="172.0" layoutY="322.0" text="Phone Number:">
+    <TextField fx:id="showConfirmPasswordField" layoutX="277.0" layoutY="258.0" managed="false" prefHeight="35.0" prefWidth="230.0" visible="false">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextField>
+
+    <Label layoutX="217.0" layoutY="351.0" text="Phone Number:">
         <font>
             <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="phoneField" layoutX="277.0" layoutY="314.0" prefHeight="35.0" prefWidth="230.0">
-      <font>
-         <Font size="14.0" />
-      </font></TextField>
+    <TextField fx:id="phoneField" layoutX="323.0" layoutY="343.0" prefHeight="35.0" prefWidth="230.0">
+        <font>
+            <Font size="14.0" />
+        </font></TextField>
 
-    <CheckBox fx:id="showPasswordCheckBox" layoutX="277.0" layoutY="364.0" onAction="#handleShowPassword" text="Show Password" />
+    <CheckBox fx:id="showPasswordCheckBox" layoutX="325.0" layoutY="399.0" onAction="#handleShowPassword" text="Show Password" />
 
-    <Button layoutX="337.0" layoutY="411.0" onAction="#handleRegisterButton" prefHeight="40.0" prefWidth="110.0" text="Register">
+    <Button layoutX="384.0" layoutY="448.0" onAction="#handleRegisterButton" prefHeight="40.0" prefWidth="110.0" text="Register">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
 
-    <Text layoutX="277.0" layoutY="488.0" text="Already have an account? ">
+    <Text layoutX="319.0" layoutY="540.0" text="Already have an account? ">
         <font>
             <Font size="14.0" />
         </font>
     </Text>
-    <Hyperlink layoutX="438.0" layoutY="468.0" onAction="#handleLoginLink" text="Login">
+    <Hyperlink layoutX="480.0" layoutY="520.0" onAction="#handleLoginLink" text="Login">
         <font>
             <Font size="14.0" />
         </font>
