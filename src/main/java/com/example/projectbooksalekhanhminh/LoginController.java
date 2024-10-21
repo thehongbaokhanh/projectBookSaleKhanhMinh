@@ -1,6 +1,7 @@
 package com.example.projectbooksalekhanhminh;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -10,7 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.sql.*;
+
 public class LoginController {
+
+    private int numberOfUsers = 0;
+
+    private User[] users = new User[numberOfUsers];
 
     @FXML
     private TextField usernameField;
@@ -31,65 +39,52 @@ public class LoginController {
     private CheckBox showPasswordCheckBox;
 
     @FXML
-    private Hyperlink registerLink;
-
-    @FXML
     private void handleLoginButton() {
         String username = usernameField.getText();
-        String password = showPasswordCheckBox.isSelected() ? showPasswordField.getText() : passwordField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
 
-        if (authenticate(username, password)) {
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+        if (password.equals(confirmPassword)) {
+            if (checkLogin(username, password)) {
+
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password.");
+            }
         } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Passwords do not match.");
         }
     }
 
-    private boolean authenticate(String username, String password) {
-        return false; // Thực hiện logic xác thực tại đây
-    }
-
-    @FXML
-    private void handleRegisterLink() {
+    public Boolean checkLogin(String username, String password) {
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT * FROM user WHERE username = ? AND password = ?";
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
-            Scene signUpScene = new Scene(loader.load());
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(signUpScene);
-            stage.setTitle("Sign Up");
-        } catch (Exception e) {
-            e.printStackTrace();
+            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return false;
     }
 
     @FXML
-    private void handleShowPassword() {
-        if (showPasswordCheckBox.isSelected()) {
-            // Hiển thị TextField, ẩn PasswordField
-            showPasswordField.setText(passwordField.getText());
-            showPasswordField.setVisible(true);
-            showPasswordField.setManaged(true);
-            passwordField.setVisible(false);
-            passwordField.setManaged(false);
-
-            showConfirmPasswordField.setText(confirmPasswordField.getText());
-            showConfirmPasswordField.setVisible(true);
-            showConfirmPasswordField.setManaged(true);
-            confirmPasswordField.setVisible(false);
-            confirmPasswordField.setManaged(false);
-        } else {
-            // Hiển thị lại PasswordField, ẩn TextField
-            passwordField.setText(showPasswordField.getText());
-            passwordField.setVisible(true);
-            passwordField.setManaged(true);
-            showPasswordField.setVisible(false);
-            showPasswordField.setManaged(false);
-
-            confirmPasswordField.setText(showConfirmPasswordField.getText());
-            confirmPasswordField.setVisible(true);
-            confirmPasswordField.setManaged(true);
-            showConfirmPasswordField.setVisible(false);
-            showConfirmPasswordField.setManaged(false);
+    private void handleRegisterButton() {
+        try {
+            // Tải lại trang đăng ky
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

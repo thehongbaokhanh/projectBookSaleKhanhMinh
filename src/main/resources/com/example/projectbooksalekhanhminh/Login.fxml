@@ -56,15 +56,12 @@
             <Font size="14.0" />
         </font>
     </PasswordField>
-
     <TextField fx:id="showConfirmPasswordField" layoutX="292.0" layoutY="297.0" managed="false" prefHeight="35.0" prefWidth="230.0" visible="false">
         <font>
             <Font size="14.0" />
         </font>
     </TextField>
-
-    <CheckBox fx:id="showPasswordCheckBox" layoutX="325.0" layoutY="364.0" onAction="#handleShowPassword" text="Show Password" />
-
+    <CheckBox fx:id="showPasswordCheckBox" layoutX="291.0" layoutY="350.0"  text="Show Password" />
     <Button alignment="CENTER" layoutX="385.0" layoutY="415.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="110.0" text="Login">
         <font>
             <Font size="15.0" />
@@ -76,7 +73,7 @@
             <Font size="14.0" />
         </font>
     </Text>
-    <Hyperlink fx:id="registerLink" layoutX="474.0" layoutY="484.0" onAction="#handleRegisterLink" text="Sign Up">
+    <Hyperlink fx:id="registerLink" layoutX="451.0" layoutY="455.0" onAction="#handleRegisterButton" text="Sign Up">
         <font>
             <Font size="14.0" />
         </font>

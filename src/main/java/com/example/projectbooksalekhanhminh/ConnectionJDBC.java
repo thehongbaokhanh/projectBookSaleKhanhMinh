@@ -3,7 +3,7 @@ import java.sql.Connection;
 
 
 public class ConnectionJDBC {
-    private String url = "jdbc:mysql://localhost:3306/bookstore";
+    private String url = "jdbc:mysql://localhost:3306/booksalesmanager";
     private String username = "root";
     private String password = "Mot2ba";
 
