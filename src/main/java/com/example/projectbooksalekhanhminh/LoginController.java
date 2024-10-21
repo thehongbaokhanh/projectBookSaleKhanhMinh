@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class LoginController {
-
     @FXML
     private TextField usernameField;
 
@@ -23,9 +22,6 @@ public class LoginController {
 
     @FXML
     private CheckBox showPasswordCheckBox;
-
-    @FXML
-    private Hyperlink registerLink;
 
     @FXML
     private void handleLoginButton() {
