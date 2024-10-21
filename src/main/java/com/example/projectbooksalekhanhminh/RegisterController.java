@@ -24,6 +24,12 @@ public class RegisterController {
     private PasswordField confirmPasswordField;
 
     @FXML
+    private TextField showPasswordField; // TextField cho hiển thị mật khẩu
+
+    @FXML
+    private TextField showConfirmPasswordField; // TextField cho hiển thị xác nhận mật khẩu
+
+    @FXML
     private TextField phoneField;
 
     @FXML
@@ -32,8 +38,8 @@ public class RegisterController {
     @FXML
     private void handleRegisterButton() {
         String username = usernameField.getText();
-        String password = passwordField.getText();
-        String confirmPassword = confirmPasswordField.getText();
+        String password = showPasswordCheckBox.isSelected() ? showPasswordField.getText() : passwordField.getText();
+        String confirmPassword = showPasswordCheckBox.isSelected() ? showConfirmPasswordField.getText() : confirmPasswordField.getText();
         String phone = phoneField.getText();
 
         // Kiểm tra số điện thoại
@@ -42,7 +48,7 @@ public class RegisterController {
             return;
         }
 
-        // Logic đăng ký ở đây
+        // Kiểm tra khớp mật khẩu
         if (password.equals(confirmPassword)) {
             // Thực hiện đăng ký
             showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Welcome " + username + "!");
@@ -71,15 +77,31 @@ public class RegisterController {
     @FXML
     private void handleShowPassword() {
         if (showPasswordCheckBox.isSelected()) {
-            passwordField.setPromptText(passwordField.getText());
-            passwordField.setText("");
-            confirmPasswordField.setPromptText(confirmPasswordField.getText());
-            confirmPasswordField.setText("");
+            // Hiển thị TextField, ẩn PasswordField
+            showPasswordField.setText(passwordField.getText());
+            showPasswordField.setVisible(true);
+            showPasswordField.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+
+            showConfirmPasswordField.setText(confirmPasswordField.getText());
+            showConfirmPasswordField.setVisible(true);
+            showConfirmPasswordField.setManaged(true);
+            confirmPasswordField.setVisible(false);
+            confirmPasswordField.setManaged(false);
         } else {
-            passwordField.setText(passwordField.getPromptText());
-            confirmPasswordField.setText(confirmPasswordField.getPromptText());
-            passwordField.setPromptText("");
-            confirmPasswordField.setPromptText("");
+            // Hiển thị lại PasswordField, ẩn TextField
+            passwordField.setText(showPasswordField.getText());
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            showPasswordField.setVisible(false);
+            showPasswordField.setManaged(false);
+
+            confirmPasswordField.setText(showConfirmPasswordField.getText());
+            confirmPasswordField.setVisible(true);
+            confirmPasswordField.setManaged(true);
+            showConfirmPasswordField.setVisible(false);
+            showConfirmPasswordField.setManaged(false);
         }
     }
 
