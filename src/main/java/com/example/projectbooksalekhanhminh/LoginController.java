@@ -1,6 +1,7 @@
 package com.example.projectbooksalekhanhminh;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -10,11 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.IOException;
+import java.sql.*;
 
-public class LoginController{
+public class LoginController {
 
     private int numberOfUsers = 0;
 
@@ -36,78 +36,58 @@ public class LoginController{
     private void handleLoginButton() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
 
-        if (authenticate(username, password)) {
-            showAlert(Alert.AlertType.INFORMATION, "Đã đăng nhập thành công.", "Xin chào " + username + "!");
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Đăng nhập thất bại.", " Tên đăng nhập hoặc mật khẩu không tồn tại.");
+        if (password.equals(confirmPassword)) {
+            if (checkLogin(username, password)) {
+
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password.");
+            }
+        }else {
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Passwords do not match.");
         }
     }
 
-    private boolean authenticate(String username, String password) {
+    private void showAlert(Alert.AlertType alertType, String title, String s) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(s);
+        alert.showAndWait();
+    }
+
+    public Boolean checkLogin(String username, String password) {
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+        try {
+            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return false;
     }
 
     @FXML
-    private void handleRegisterLink() {
+    private void handleRegisterButton() {
         try {
+            // Tải lại trang đăng ky
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
-            Scene signUpScene = new Scene(loader.load());
+            Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(signUpScene);
-            stage.setTitle("Sign Up");
-        } catch (Exception e) {
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    private void handleShowPassword() {
-        if (showPasswordCheckBox.isSelected()) {
-            passwordField.setPromptText(passwordField.getText());
-            passwordField.setText("");
-            confirmPasswordField.setPromptText(confirmPasswordField.getText());
-            confirmPasswordField.setText("");
-        } else {
-            passwordField.setText(passwordField.getPromptText());
-            confirmPasswordField.setText(confirmPasswordField.getPromptText());
-            passwordField.setPromptText("");
-            confirmPasswordField.setPromptText("");
-        }
-    }
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    public User[] getUsersInfor(){
-        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
-        Connection connection = connectionJDBC.getConnection();
-        String query = "SELECT * FROM users";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                int id = resultSet.getInt("userID");
-                String userName = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String email = resultSet.getString("email");
-                String address = resultSet.getString("address");
-                String role = resultSet.getString("role");
-                User user = new User(id, userName, password, phoneNumber, email, address, role);
-                users[numberOfUsers] = user;
-                numberOfUsers++;
-            }
-            connection.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return users;
-    }
 }
