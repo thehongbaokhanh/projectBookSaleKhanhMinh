@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.HomeController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@/path/to/your/image.jpg" />
+            </image>
+        </ImageView>
+
+        <AnchorPane layoutX="81.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="738.0">
+            <children>
+                <HBox layoutX="46.0" layoutY="38.0" prefHeight="35.0" prefWidth="647.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Home" />
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Product" />
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Order" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Bill" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="User information" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
