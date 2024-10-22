@@ -77,8 +77,8 @@ public class RegisterController {
 
     private int numberOfUsers(){
         int numberOfUsers = 0;
-        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
-        Connection connection = connectionJDBC.getConnection();
+        ConnectJDBC connectionJDBC = new ConnectJDBC();
+        Connection connection = connectionJDBC.getConnect();
         String query = "SELECT * FROM user";
         try {
             Statement statement = connection.createStatement();
