@@ -1,24 +1,16 @@
 package com.example.projectbooksalekhanhminh;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Hyperlink;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 
 public class LoginController {
-
-    private int numberOfUsers = 0;
-
-    private User[] users = new User[numberOfUsers];
 
     @FXML
     private TextField usernameField;
@@ -27,13 +19,13 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
+    private TextField passwordTextField;
+
+    @FXML
     private PasswordField confirmPasswordField;
 
     @FXML
-    private TextField showPasswordField; // TextField cho hiển thị mật khẩu
-
-    @FXML
-    private TextField showConfirmPasswordField; // TextField cho hiển thị xác nhận mật khẩu
+    private TextField confirmPasswordTextField;
 
     @FXML
     private CheckBox showPasswordCheckBox;
@@ -41,12 +33,11 @@ public class LoginController {
     @FXML
     private void handleLoginButton() {
         String username = usernameField.getText();
-        String password = passwordField.getText();
-        String confirmPassword = confirmPasswordField.getText();
+        String password = showPasswordCheckBox.isSelected() ? passwordTextField.getText() : passwordField.getText();
+        String confirmPassword = showPasswordCheckBox.isSelected() ? confirmPasswordTextField.getText() : confirmPasswordField.getText();
 
         if (password.equals(confirmPassword)) {
             if (checkLogin(username, password)) {
-
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password.");
@@ -56,29 +47,55 @@ public class LoginController {
         }
     }
 
+    @FXML
+    private void toggleShowPassword() {
+        if (showPasswordCheckBox.isSelected()) {
+            // Show password in TextField and hide PasswordField
+            passwordTextField.setText(passwordField.getText());
+            passwordTextField.setVisible(true);
+            passwordTextField.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+
+            confirmPasswordTextField.setText(confirmPasswordField.getText());
+            confirmPasswordTextField.setVisible(true);
+            confirmPasswordTextField.setManaged(true);
+            confirmPasswordField.setVisible(false);
+            confirmPasswordField.setManaged(false);
+        } else {
+            // Hide password and show PasswordField
+            passwordField.setText(passwordTextField.getText());
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            passwordTextField.setVisible(false);
+            passwordTextField.setManaged(false);
+
+            confirmPasswordField.setText(confirmPasswordTextField.getText());
+            confirmPasswordField.setVisible(true);
+            confirmPasswordField.setManaged(true);
+            confirmPasswordTextField.setVisible(false);
+            confirmPasswordTextField.setManaged(false);
+        }
+    }
+
     public Boolean checkLogin(String username, String password) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "SELECT * FROM user WHERE username = ? AND password = ?";
         try {
-            Statement statement = connection.createStatement();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return false;
     }
 
     @FXML
     private void handleRegisterButton() {
         try {
-            // Tải lại trang đăng ky
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
