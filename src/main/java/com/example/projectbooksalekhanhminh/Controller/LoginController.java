@@ -29,6 +29,7 @@ public class LoginController {
 
     @FXML
     private CheckBox showPasswordCheckBox;
+    @FXML
     private void handleLoginButton() {
         String username = usernameField.getText();
         String password = showPasswordCheckBox.isSelected() ? passwordTextField.getText() : passwordField.getText();
