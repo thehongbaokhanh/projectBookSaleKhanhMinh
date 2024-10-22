@@ -103,7 +103,7 @@ public class RegisterController {
 
     public String generateUsersID(int numberOfUsers) {
         int totalDigitals = 5;
-        String formattedID = String.format("KH%0" + totalDigitals + "d", numberOfUsers + 1);
+        String formattedID = String.format("CM%0" + totalDigitals + "d", numberOfUsers + 1);
         return formattedID;
     }
 
