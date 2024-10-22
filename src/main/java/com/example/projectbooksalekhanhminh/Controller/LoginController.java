@@ -1,5 +1,7 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.Controller;
 
+import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
+import com.example.projectbooksalekhanhminh.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -17,8 +19,6 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
-
-    @FXML
     private TextField passwordTextField;
 
     @FXML
@@ -29,8 +29,6 @@ public class LoginController {
 
     @FXML
     private CheckBox showPasswordCheckBox;
-
-    @FXML
     private void handleLoginButton() {
         String username = usernameField.getText();
         String password = showPasswordCheckBox.isSelected() ? passwordTextField.getText() : passwordField.getText();
@@ -96,7 +94,7 @@ public class LoginController {
     @FXML
     private void handleRegisterButton() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Register.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));

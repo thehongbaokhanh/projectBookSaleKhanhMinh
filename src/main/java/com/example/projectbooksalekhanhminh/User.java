@@ -1,7 +1,7 @@
 package com.example.projectbooksalekhanhminh;
 
 public class User {
-    private int id;
+    private String id;
     private String username;
     private String password;
     private String phoneNumber;
@@ -9,7 +9,7 @@ public class User {
     private String address;
     private String role;
 
-    public User(int id, String username, String password, String phoneNumber, String email, String address, String role) {
+    public User(String id, String username, String password, String phoneNumber, String email, String address, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -22,11 +22,11 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -90,6 +90,4 @@ public class User {
                 ", role='" + role + '\'' +
                 '}';
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.connection;
 import java.sql.Connection;
 
 

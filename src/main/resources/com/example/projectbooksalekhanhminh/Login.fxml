@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.Controller.LoginController">
 
     <Text layoutX="326.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="148.4902322292328" AnchorPane.leftAnchor="326.0" AnchorPane.rightAnchor="325.5097677707672">
         <font>
@@ -31,11 +31,13 @@
             <Font size="14.0" />
         </font>
     </TextField>
+
     <PasswordField fx:id="confirmPasswordField" layoutX="285.0" layoutY="311.0" prefHeight="35.0" prefWidth="230.0" promptText="Confirm Password" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="285.0">
         <font>
             <Font size="14.0" />
         </font>
     </PasswordField>
+
     <TextField fx:id="confirmPasswordTextField" layoutX="285.0" layoutY="311.0" managed="false" prefHeight="35.0" prefWidth="230.0" visible="false">
         <font>
             <Font size="14.0" />
