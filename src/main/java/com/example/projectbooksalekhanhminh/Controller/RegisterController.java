@@ -1,4 +1,4 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +27,10 @@ public class RegisterController {
     private TextField phoneField;
 
     @FXML
-    private CheckBox showPasswordCheckBox;
+    private TextField emailField;
+
+    @FXML
+    private TextField addressField;
 
     @FXML
     private void handleRegisterButton() {
@@ -35,8 +38,10 @@ public class RegisterController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String phone = phoneField.getText();
+        String email = emailField.getText();
+        String address = addressField.getText();
 
-        // Kiểm tra số điện thoại
+        // Kiểm tra thông tin đăng ký
         if (!isValidPhoneNumber(phone)) {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "Phone number must be 10 digits and start with 0.");
             return;
@@ -58,28 +63,12 @@ public class RegisterController {
     @FXML
     private void handleLoginLink() {
         try {
-            // Tải lại trang đăng nhập
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleShowPassword() {
-        if (showPasswordCheckBox.isSelected()) {
-            passwordField.setPromptText(passwordField.getText());
-            passwordField.setText("");
-            confirmPasswordField.setPromptText(confirmPasswordField.getText());
-            confirmPasswordField.setText("");
-        } else {
-            passwordField.setText(passwordField.getPromptText());
-            confirmPasswordField.setText(confirmPasswordField.getPromptText());
-            passwordField.setPromptText("");
-            confirmPasswordField.setPromptText("");
         }
     }
 
@@ -90,4 +79,12 @@ public class RegisterController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public String generateUsersID(int numberOfUsers) {
+        int totalDigitals = 5;
+        String formattedID = String.format("KH%0" + totalDigitals + "d", numberOfUsers + 1);
+        return formattedID;
+    }
+
+
 }

@@ -1,11 +1,11 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.connection;
 import java.sql.Connection;
 
 
 public class ConnectionJDBC {
-    private String url = "jdbc:mysql://localhost:3306/bookstore";
+    private String url = "jdbc:mysql://localhost:3306/booksalesmanager";
     private String username = "root";
-    private String password = "123456";
+    private String password = "khanhanhanmiu";
 
     public Connection getConnection() {
         Connection connection = null;

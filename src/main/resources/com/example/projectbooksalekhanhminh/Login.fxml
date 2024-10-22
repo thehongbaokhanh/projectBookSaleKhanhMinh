@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.Controller.LoginController">
 
     <Text layoutX="291.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="231.13671875">
         <font>
@@ -51,7 +51,7 @@
         </font>
     </PasswordField>
 
-    <CheckBox fx:id="showPasswordCheckBox" layoutX="291.0" layoutY="350.0" onAction="#handleShowPassword" text="Show Password" />
+    <CheckBox fx:id="showPasswordCheckBox" layoutX="291.0" layoutY="350.0"  text="Show Password" />
 
     <Button alignment="CENTER" layoutX="352.0" layoutY="396.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="110.0" text="Login">
         <font>
@@ -64,7 +64,7 @@
             <Font size="14.0" />
         </font>
     </Text>
-    <Hyperlink fx:id="registerLink" layoutX="451.0" layoutY="455.0" onAction="#handleRegisterLink" text="Sign Up">
+    <Hyperlink fx:id="registerLink" layoutX="451.0" layoutY="455.0" onAction="#handleRegisterButton" text="Sign Up">
         <font>
             <Font size="14.0" />
         </font>
