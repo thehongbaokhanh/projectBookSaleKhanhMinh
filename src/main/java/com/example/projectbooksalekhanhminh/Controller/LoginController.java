@@ -1,12 +1,13 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.Controller;
 
+import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
+import com.example.projectbooksalekhanhminh.User;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Hyperlink;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -27,10 +28,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    private PasswordField confirmPasswordField; // Thêm trường xác nhận mật khẩu
-
-    @FXML
-    private CheckBox showPasswordCheckBox;
+    private PasswordField confirmPasswordField;
 
     @FXML
     private void handleLoginButton() {
@@ -80,8 +78,7 @@ public class LoginController {
     @FXML
     private void handleRegisterButton() {
         try {
-            // Tải lại trang đăng ky
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Register.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -89,5 +86,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
 }
