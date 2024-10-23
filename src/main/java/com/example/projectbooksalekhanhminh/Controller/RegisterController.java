@@ -94,7 +94,7 @@ public class RegisterController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-     return numberOfUsers;
+        return numberOfUsers;
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

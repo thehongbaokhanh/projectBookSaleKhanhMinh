@@ -1,7 +1,7 @@
+
 package com.example.projectbooksalekhanhminh.Controller;
 
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
-import com.example.projectbooksalekhanhminh.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
