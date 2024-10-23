@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String address;
     private String role;
+    private boolean status;
 
     public User(String id, String username, String password, String phoneNumber, String email, String address, String role) {
         this.id = id;
@@ -17,6 +18,7 @@ public class User {
         this.email = email;
         this.address = address;
         this.role = role;
+        this.status = true;
     }
 
     public User() {
@@ -76,6 +78,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override

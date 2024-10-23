@@ -114,7 +114,7 @@ public class RegisterController {
     public void addUser(String id, String username, String password, String phone, String email, String address) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
-        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -124,6 +124,7 @@ public class RegisterController {
             statement.setString(5, email);
             statement.setString(6, address);
             statement.setString(7, "customer");
+            statement.setBoolean(8, true);
             statement.executeUpdate();
             connection.close();
             System.out.println("Add user successfully");
