@@ -44,23 +44,27 @@ public class RegisterController {
 
         if (username.isEmpty() && password.isEmpty() && confirmPassword.isEmpty() && phone.isEmpty() && email.isEmpty() && address.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Register Failed", "Please enter all fields");
+        } else if (!password.equals(confirmPassword)) {
+            showAlert(Alert.AlertType.ERROR, "Register Failed", "Passwords do not match");
+        }else if (!isValidPhoneNumber(phone)) {
+            showAlert(Alert.AlertType.ERROR, "Register Failed", "Invalid phone number");
+        } else if (isValidPassword(password)) {
+            showAlert(Alert.AlertType.ERROR, "Register Failed", "Password must be at least 8 characters long.");
         }else {
-            if (password.equals(confirmPassword)) {
-                int numberOfUsers = numberOfUsers();
-                String usersID = generateUsersID(numberOfUsers);
-                addUser(usersID, username, password, phone, email, address);
-                showAlert(Alert.AlertType.INFORMATION, "Register Successful", "User " + username + " has been registered successfully");
-                handleLoginLink();
-            }if (!isValidPhoneNumber(phone)) {
-                showAlert(Alert.AlertType.ERROR, "Register Failed", "Please enter a valid phone number");
-            }else if (!password.equals(confirmPassword)) {
-                showAlert(Alert.AlertType.ERROR, "Register Failed", "Passwords do not match");
-            }
+            int numberOfUsers = numberOfUsers();
+            String id = generateUsersID(numberOfUsers + 1);
+            addUser(id, username, password, phone, email, address);
+            showAlert(Alert.AlertType.INFORMATION, "Register Successful", "User registered successfully");
+            handleLoginLink();
         }
     }
 
     private boolean isValidPhoneNumber(String phone) {
         return phone.matches("^0\\d{9}$"); // Kiểm tra 10 chữ số bắt đầu bằng 0
+    }
+
+    private boolean isValidPassword(String password) {
+        return password.matches("\"^.{8,}$\"\n");
     }
 
     @FXML
