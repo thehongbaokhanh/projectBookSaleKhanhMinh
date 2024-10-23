@@ -38,6 +38,7 @@ public class LoginController {
         if (password.equals(confirmPassword)) {
             if (checkLogin(username, password)) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+                changeSceneHomeAdmin();
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password or account is disabled.");
             }
@@ -45,7 +46,6 @@ public class LoginController {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Passwords do not match.");
         }
     }
-
     public Boolean checkLogin(String username, String password) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
@@ -80,6 +80,19 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+    private void changeSceneHomeAdmin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/HomeAdmin.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
