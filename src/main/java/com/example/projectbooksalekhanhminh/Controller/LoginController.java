@@ -1,22 +1,16 @@
+
 package com.example.projectbooksalekhanhminh.Controller;
 
-import com.example.projectbooksalekhanhminh.connection.ConnectJDBC;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LoginController {
 
@@ -26,6 +20,7 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
     private TextField passwordTextField;
+
     @FXML
     private PasswordField confirmPasswordField;
 
@@ -83,8 +78,8 @@ public class LoginController {
     }
 
     public Boolean checkLogin(String username, String password) {
-        ConnectJDBC connectJDBC = new ConnectJDBC();
-        Connection connection = connectJDBC.getConnection();
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
         String query = "SELECT * FROM user WHERE username = ? AND password = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);

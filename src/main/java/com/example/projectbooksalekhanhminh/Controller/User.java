@@ -1,4 +1,4 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.Controller;
 
 public class User {
     private String id;

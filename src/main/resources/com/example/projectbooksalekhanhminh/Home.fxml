@@ -17,7 +17,7 @@
                 <Image url="@img/backgrouHome.jpg" />
             </image>
         </ImageView>
-        <AnchorPane layoutX="78.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="738.0" style="-fx-background-color: #dedede;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="70.0">
+        <AnchorPane layoutX="80.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="740.0" style="-fx-background-color: #dedede;" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="95.0">
             <children>
                 <HBox layoutX="47.0" layoutY="33.0" prefHeight="35.0" prefWidth="647.0">
                     <children>
@@ -29,6 +29,9 @@
                     </children>
                 </HBox>
             </children>
+         <padding>
+            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+         </padding>
         </AnchorPane>
     </children>
 </AnchorPane>

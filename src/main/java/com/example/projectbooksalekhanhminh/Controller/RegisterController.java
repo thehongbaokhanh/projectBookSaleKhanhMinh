@@ -77,8 +77,8 @@ public class RegisterController {
 
     private int numberOfUsers(){
         int numberOfUsers = 0;
-        ConnectJDBC connectionJDBC = new ConnectJDBC();
-        Connection connection = connectionJDBC.getConnect();
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
         String query = "SELECT * FROM user";
         try {
             Statement statement = connection.createStatement();
@@ -90,7 +90,7 @@ public class RegisterController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-     return numberOfUsers;
+        return numberOfUsers;
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
