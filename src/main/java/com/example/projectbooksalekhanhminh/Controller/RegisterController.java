@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,6 +35,13 @@ public class RegisterController {
     private TextField addressField;
 
     @FXML
+    private TextField passwordTextField;  // For showing password
+    @FXML
+    private TextField confirmPasswordTextField; // For showing confirm password
+    @FXML
+    private CheckBox showPasswordCheckBox;
+
+    @FXML
     private void handleRegisterButton() {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -42,15 +50,15 @@ public class RegisterController {
         String email = emailField.getText();
         String address = addressField.getText();
 
-        if (username.isEmpty() && password.isEmpty() && confirmPassword.isEmpty() && phone.isEmpty() && email.isEmpty() && address.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || phone.isEmpty() || email.isEmpty() || address.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Register Failed", "Please enter all fields");
         } else if (!password.equals(confirmPassword)) {
             showAlert(Alert.AlertType.ERROR, "Register Failed", "Passwords do not match");
-        }else if (!isValidPhoneNumber(phone)) {
+        } else if (!isValidPhoneNumber(phone)) {
             showAlert(Alert.AlertType.ERROR, "Register Failed", "Invalid phone number");
-        } else if (isValidPassword(password)) {
+        } else if (!isValidPassword(password)) {
             showAlert(Alert.AlertType.ERROR, "Register Failed", "Password must be at least 8 characters long.");
-        }else {
+        } else {
             int numberOfUsers = numberOfUsers();
             String id = generateUsersID(numberOfUsers + 1);
             addUser(id, username, password, phone, email, address);
@@ -60,11 +68,30 @@ public class RegisterController {
     }
 
     private boolean isValidPhoneNumber(String phone) {
-        return phone.matches("^0\\d{9}$"); // Kiểm tra 10 chữ số bắt đầu bằng 0
+        return phone.matches("^0\\d{9}$"); // Validates 10 digits starting with 0
     }
 
     private boolean isValidPassword(String password) {
-        return password.matches("\"^.{8,}$\"\n");
+        return password.length() >= 8; // Password length validation
+    }
+
+    @FXML
+    private void handleShowPasswordCheckBox() {
+        if (showPasswordCheckBox.isSelected()) {
+            passwordTextField.setText(passwordField.getText());
+            confirmPasswordTextField.setText(confirmPasswordField.getText());
+            passwordField.setVisible(false);
+            confirmPasswordField.setVisible(false);
+            passwordTextField.setVisible(true);
+            confirmPasswordTextField.setVisible(true);
+        } else {
+            passwordField.setText(passwordTextField.getText());
+            confirmPasswordField.setText(confirmPasswordTextField.getText());
+            passwordField.setVisible(true);
+            confirmPasswordField.setVisible(true);
+            passwordTextField.setVisible(false);
+            confirmPasswordTextField.setVisible(false);
+        }
     }
 
     @FXML
@@ -79,7 +106,7 @@ public class RegisterController {
         }
     }
 
-    private int numberOfUsers(){
+    private int numberOfUsers() {
         int numberOfUsers = 0;
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
