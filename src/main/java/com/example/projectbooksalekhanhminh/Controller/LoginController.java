@@ -39,54 +39,31 @@ public class LoginController {
             if (checkLogin(username, password)) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
             } else {
-                showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password.");
+                showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password or account is disabled.");
             }
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Passwords do not match.");
         }
     }
 
-    @FXML
-    private void toggleShowPassword() {
-        if (showPasswordCheckBox.isSelected()) {
-            // Show password in TextField and hide PasswordField
-            passwordTextField.setText(passwordField.getText());
-            passwordTextField.setVisible(true);
-            passwordTextField.setManaged(true);
-            passwordField.setVisible(false);
-            passwordField.setManaged(false);
-
-            confirmPasswordTextField.setText(confirmPasswordField.getText());
-            confirmPasswordTextField.setVisible(true);
-            confirmPasswordTextField.setManaged(true);
-            confirmPasswordField.setVisible(false);
-            confirmPasswordField.setManaged(false);
-        } else {
-            // Hide password and show PasswordField
-            passwordField.setText(passwordTextField.getText());
-            passwordField.setVisible(true);
-            passwordField.setManaged(true);
-            passwordTextField.setVisible(false);
-            passwordTextField.setManaged(false);
-
-            confirmPasswordField.setText(confirmPasswordTextField.getText());
-            confirmPasswordField.setVisible(true);
-            confirmPasswordField.setManaged(true);
-            confirmPasswordTextField.setVisible(false);
-            confirmPasswordTextField.setManaged(false);
-        }
-    }
-
     public Boolean checkLogin(String username, String password) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
+        boolean status = false;
         String query = "SELECT * FROM user WHERE username = ? AND password = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            while (resultSet.next()) {
+                status = resultSet.getBoolean("status");
+            }
+            if (status) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
