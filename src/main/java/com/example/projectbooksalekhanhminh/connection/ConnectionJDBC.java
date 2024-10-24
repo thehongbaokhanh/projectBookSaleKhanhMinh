@@ -3,11 +3,11 @@ import java.sql.Connection;
 
 
 public class ConnectionJDBC {
-    private String url = "jdbc:mysql://localhost:3306/booksalesmanager";
-    private String username = "root";
-    private String password = "khanhanhanmiu";
+    private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+    private static String username = "root";
+    private static String password = "khanhanhanmiu";
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
