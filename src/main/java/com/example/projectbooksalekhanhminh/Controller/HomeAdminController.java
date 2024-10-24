@@ -1,21 +1,14 @@
 package com.example.projectbooksalekhanhminh.Controller;
 
+import com.example.projectbooksalekhanhminh.User;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
-import static javafx.scene.control.cell.PropertyValueFactory.*;
-
-import java.net.URL;
 import java.sql.*;
-import java.util.ResourceBundle;
 
 public class HomeAdminController {
 
