@@ -71,5 +71,56 @@
             </ImageView>
          </children>
       </AnchorPane>
+=======
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.projectbooksalekhanhminh.Controller.HomeAdminController">
+    <children>
+        <ImageView fitHeight="602.0" fitWidth="901.0" pickOnBounds="true" preserveRatio="true"
+                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="0.0">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+            <image>
+                <Image url="@img/backgrouHome.jpg"/>
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="80.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="415.0" prefWidth="740.0" style="-fx-background-color: #dedede;"
+                    AnchorPane.bottomAnchor="95.39999999999998" AnchorPane.leftAnchor="80.0"
+                    AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="95.0">
+            <children>
+                <HBox layoutX="47.0" layoutY="33.0" prefHeight="35.0" prefWidth="647.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="Home"/>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="Product"/>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="Order"/>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="Bill"/>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="User information"/>
+                    </children>
+                </HBox>
+                <TableView  layoutX="47.0" layoutY="105.0" prefHeight="287.0" prefWidth="647.0">
+                    <columns>
+                        <TableColumn prefWidth="50.79998779296875" text="UserID" />
+                        <TableColumn prefWidth="130.19999694824219" text="UserName" />
+                        <TableColumn prefWidth="140.79998779296875" text="Phone number" />
+                        <TableColumn prefWidth="110.0" text="Email" />
+                        <TableColumn prefWidth="90.5999755859375" text="Address" />
+                        <TableColumn prefWidth="65.5999755859375" text="Role" />
+                        <TableColumn prefWidth="65.0" text="Status" />
+                    </columns>
+                </TableView>
+            </children>
+            <padding>
+                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
+            </padding>
+        </AnchorPane>
     </children>
 </AnchorPane>

@@ -11,7 +11,6 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeAdmin.fxml"));
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(loader.load()));
-//        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 

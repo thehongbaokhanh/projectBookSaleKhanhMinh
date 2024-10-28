@@ -18,6 +18,7 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
+  
     @FXML
     private TextField passwordTextField;
 
@@ -32,17 +33,36 @@ public class LoginController {
     @FXML
     private void handleLoginButton() {
         String username = usernameField.getText();
-        String password = showPasswordCheckBox.isSelected() ? passwordTextField.getText() : passwordField.getText();
-        String confirmPassword = showPasswordCheckBox.isSelected() ? confirmPasswordTextField.getText() : confirmPasswordField.getText();
-
-        if (password.equals(confirmPassword)) {
-            if (checkLogin(username, password)) {
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
+        String password = passwordField.getText();
+        if (checkLogin(username, password)) {
+            if (getUserRoleFromDB(username).equalsIgnoreCase("Admin")) {
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome admin " + username + "!");
+            changeSceneHomeAdmin();
             } else {
-                showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password or account is disabled.");
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome customers" + username + "!");
+                handleRegisterButton();
             }
         } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Passwords do not match.");
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password or account is disabled.");
+        }
+    }
+
+
+    public String getUserRoleFromDB(String username) {
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String role = "";
+        String query = "SELECT role FROM user WHERE username = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                role = resultSet.getString("role");
+            }
+            return role;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -76,7 +96,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
+  
     @FXML
     private void handleShowPasswordCheckBox() {
         if (showPasswordCheckBox.isSelected()) {
@@ -88,6 +108,16 @@ public class LoginController {
             passwordField.setText(passwordTextField.getText());
             passwordField.setVisible(true);
             passwordTextField.setVisible(false);
+          
+    private void changeSceneHomeAdmin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/HomeAdmin.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
