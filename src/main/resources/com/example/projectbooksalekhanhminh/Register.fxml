@@ -42,6 +42,8 @@
         </font>
     </PasswordField>
 
+    <TextField fx:id="passwordTextField" layoutX="277.0" layoutY="172.0" prefHeight="35.0" prefWidth="230.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" visible="false" promptText="Password" />
+
     <!-- Confirm Password -->
     <Label layoutX="176.0" layoutY="229.0" text="Confirm Password:" AnchorPane.rightAnchor="609.0">
         <font>
@@ -53,6 +55,8 @@
             <Font size="14.0" />
         </font>
     </PasswordField>
+
+    <TextField fx:id="confirmPasswordTextField" layoutX="277.0" layoutY="222.0" prefHeight="35.0" prefWidth="230.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" visible="false" promptText="Confirm Password" />
 
     <!-- Phone Number -->
     <Label layoutX="212.0" layoutY="280.0" text="Phone Number:" AnchorPane.rightAnchor="609.0">
@@ -91,7 +95,7 @@
     </TextField>
 
     <!-- Show Password -->
-    <CheckBox fx:id="showPasswordCheckBox" layoutX="300.0" layoutY="424.0" text="Show Password" />
+    <CheckBox fx:id="showPasswordCheckBox" layoutX="300.0" layoutY="424.0" text="Show Password" onAction="#handleShowPasswordCheckBox" />
 
     <!-- Register Button -->
     <Button layoutX="395.0" layoutY="468.0" onAction="#handleRegisterButton" prefHeight="40.0" prefWidth="110.0" text="Register" AnchorPane.leftAnchor="395.0" AnchorPane.rightAnchor="395.0">

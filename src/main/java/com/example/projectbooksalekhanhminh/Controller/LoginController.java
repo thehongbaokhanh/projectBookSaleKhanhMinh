@@ -1,4 +1,3 @@
-
 package com.example.projectbooksalekhanhminh.Controller;
 
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
@@ -19,7 +18,14 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
+  
+    @FXML
+    private TextField passwordTextField;
 
+    @FXML
+    private PasswordField confirmPasswordField;
+    @FXML
+    private TextField confirmPasswordTextField;
 
     @FXML
     private CheckBox showPasswordCheckBox;
@@ -73,11 +79,7 @@ public class LoginController {
             while (resultSet.next()) {
                 status = resultSet.getBoolean("status");
             }
-            if (status) {
-                return true;
-            } else {
-                return false;
-            }
+            return status;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +96,19 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
+  
+    @FXML
+    private void handleShowPasswordCheckBox() {
+        if (showPasswordCheckBox.isSelected()) {
+            passwordTextField.setText(passwordField.getText());
+            passwordField.setVisible(false);
+            passwordTextField.setVisible(true);
+            passwordTextField.requestFocus();
+        } else {
+            passwordField.setText(passwordTextField.getText());
+            passwordField.setVisible(true);
+            passwordTextField.setVisible(false);
+          
     private void changeSceneHomeAdmin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/HomeAdmin.fxml"));
