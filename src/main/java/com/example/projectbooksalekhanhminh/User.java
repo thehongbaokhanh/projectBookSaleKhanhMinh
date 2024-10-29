@@ -1,4 +1,4 @@
-package com.example.projectbooksalekhanhminh.Controller;
+package com.example.projectbooksalekhanhminh;
 
 public class User {
     private String id;
@@ -22,6 +22,16 @@ public class User {
     }
 
     public User() {
+    }
+
+    public User(String id, String username, String phoneNumber, String email, String address, String role, boolean status) {
+        this.id = id;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+        this.status = status;
     }
 
     public String getId() {
