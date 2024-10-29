@@ -105,8 +105,7 @@ public class LoginController {
             passwordTextField.setVisible(false);
         }
     }
-
-    private void changeSceneHomeAdmin() {
+    private void changeSceneHomeAdmin () {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/HomeAdmin.fxml"));
             Parent root = loader.load();
@@ -118,7 +117,7 @@ public class LoginController {
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
+    private void showAlert (Alert.AlertType alertType, String title, String message){
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
