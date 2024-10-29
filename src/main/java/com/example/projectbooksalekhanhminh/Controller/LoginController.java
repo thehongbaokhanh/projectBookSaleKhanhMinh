@@ -18,14 +18,9 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
-  
-    @FXML
-    private TextField passwordTextField;
 
     @FXML
-    private PasswordField confirmPasswordField;
-    @FXML
-    private TextField confirmPasswordTextField;
+    private TextField passwordTextField;
 
     @FXML
     private CheckBox showPasswordCheckBox;
@@ -36,8 +31,8 @@ public class LoginController {
         String password = passwordField.getText();
         if (checkLogin(username, password)) {
             if (getUserRoleFromDB(username).equalsIgnoreCase("Admin")) {
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome admin " + username + "!");
-            changeSceneHomeAdmin();
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome admin " + username + "!");
+                changeSceneHomeAdmin();
             } else {
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome customers" + username + "!");
                 handleRegisterButton();
@@ -96,7 +91,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-  
+
     @FXML
     private void handleShowPasswordCheckBox() {
         if (showPasswordCheckBox.isSelected()) {
@@ -108,7 +103,9 @@ public class LoginController {
             passwordField.setText(passwordTextField.getText());
             passwordField.setVisible(true);
             passwordTextField.setVisible(false);
-          
+        }
+    }
+
     private void changeSceneHomeAdmin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/HomeAdmin.fxml"));

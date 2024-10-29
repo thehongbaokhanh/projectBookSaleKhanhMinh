@@ -98,5 +98,30 @@ public class HomeAdminController {
             throw new RuntimeException(e);
         }
     }
+
+    public void findUser(String username) {
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT * FROM user where userName = ?";
+        try {
+            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                String role = resultSet.getString("role");
+                boolean status = resultSet.getBoolean("status");
+                userList.add(new User(id, username, phoneNumber, email, address, role, status));
+            }
+            userTable.setItems(userList);
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
