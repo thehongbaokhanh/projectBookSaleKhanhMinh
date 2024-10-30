@@ -35,13 +35,6 @@ public class RegisterController {
     private TextField addressField;
 
     @FXML
-    private TextField passwordTextField;  // For showing password
-    @FXML
-    private TextField confirmPasswordTextField; // For showing confirm password
-    @FXML
-    private CheckBox showPasswordCheckBox;
-
-    @FXML
     private void handleRegisterButton() {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -68,30 +61,11 @@ public class RegisterController {
     }
 
     private boolean isValidPhoneNumber(String phone) {
-        return phone.matches("^0\\d{9}$"); // Validates 10 digits starting with 0
+        return phone.matches("^0\\d{9}$");
     }
 
     private boolean isValidPassword(String password) {
-        return password.length() >= 8; // Password length validation
-    }
-
-    @FXML
-    private void handleShowPasswordCheckBox() {
-        if (showPasswordCheckBox.isSelected()) {
-            passwordTextField.setText(passwordField.getText());
-            confirmPasswordTextField.setText(confirmPasswordField.getText());
-            passwordField.setVisible(false);
-            confirmPasswordField.setVisible(false);
-            passwordTextField.setVisible(true);
-            confirmPasswordTextField.setVisible(true);
-        } else {
-            passwordField.setText(passwordTextField.getText());
-            confirmPasswordField.setText(confirmPasswordTextField.getText());
-            passwordField.setVisible(true);
-            confirmPasswordField.setVisible(true);
-            passwordTextField.setVisible(false);
-            confirmPasswordTextField.setVisible(false);
-        }
+        return password.length() >= 8;
     }
 
     @FXML
