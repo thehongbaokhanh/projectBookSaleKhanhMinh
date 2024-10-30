@@ -20,16 +20,16 @@
             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
          </padding>
          <children>
-            <TableView layoutX="51.0" layoutY="154.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="125.0">
+            <TableView layoutX="51.0" layoutY="154.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="125.0" fx:id="userTable">
               <columns>
-                <TableColumn minWidth="65.0" prefWidth="70.0" text="Product ID" />
-                <TableColumn minWidth="100.0" prefWidth="126.0" text="Product Name" />
-                  <TableColumn minWidth="85.0" prefWidth="98.0" text="Author" />
-                  <TableColumn minWidth="78.0" prefWidth="110.0" text="Publication Year" />
-                  <TableColumn minWidth="150.0" prefWidth="176.0" text="Description" />
-                  <TableColumn prefWidth="113.0" text="Category" />
-                  <TableColumn prefWidth="104.0" text="Price" />
-                  <TableColumn prefWidth="100.0" text="Stock Quantity" />
+                <TableColumn minWidth="65.0" prefWidth="70.0" text="User ID" fx:id="idColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="User Name" fx:id="usernameColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="Phone number" fx:id="phoneNumberColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="Email" fx:id="emailColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="Address" fx:id="addressColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="Role" fx:id="roleColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="Status" fx:id="statusColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="126.0" text="Action" fx:id="actionColumn"/>
               </columns>
             </TableView>
             <ButtonBar buttonMinWidth="100.0" layoutX="59.0" layoutY="42.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="450.0">

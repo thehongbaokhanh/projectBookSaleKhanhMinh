@@ -5,10 +5,13 @@ import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 
 public class HomeAdminController {
 
@@ -16,49 +19,72 @@ public class HomeAdminController {
     private TableView<User> userTable;
 
     @FXML
-    private TableColumn idColumn;
+    private TableColumn<User, String> idColumn;
 
     @FXML
-    private TableColumn usernameColumn;
+    private TableColumn<User, String> usernameColumn;
 
     @FXML
-    private TableColumn phoneNumberColumn;
+    private TableColumn<User, String> phoneNumberColumn;
 
     @FXML
-    private TableColumn emailColumn;
+    private TableColumn<User, String> emailColumn;
 
     @FXML
-    private TableColumn addressColumn;
+    private TableColumn<User, String> addressColumn;
 
     @FXML
-    private TableColumn roleColumn;
+    private TableColumn<User, String> roleColumn;
 
     @FXML
-    private TableColumn statusColumn;
+    private TableColumn<User, Boolean> statusColumn;
+
+    @FXML
+    private TableColumn<User, Void> actionColumn;
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
 
+    public void initialize() {
+        loadData();
+    }
+
+    private void setColumn() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        actionColumn.setCellFactory(col -> new TableCell<>() {
+                }
+        );
+    }
+
+
     private void loadData() {
         Connection connection = ConnectionJDBC.getConnection();
-        String query = "SELECT * FROM user";
+
+        String query = "SELECT userID, userName, phoneNumber, email, address, role, status FROM user where role = 'Customer'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
+                String id = resultSet.getString("userID");
                 String username = resultSet.getString("username");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
                 String role = resultSet.getString("role");
                 boolean status = resultSet.getBoolean("status");
-                userList.add(new User(id, username, phoneNumber, email, address, role, status));
+                User user = new User(id, username, phoneNumber, email, address, role, status);
+                userTable.getItems().add(user);
             }
-            userTable.setItems(userList);
-            connection.close();
+            System.out.println("Load data successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setColumn();
     }
 
     public void changeStatus(String id) {
@@ -77,7 +103,8 @@ public class HomeAdminController {
         }
     }
 
-    public void addMoreAdminUser(String id, String username, String password, String phone, String email, String address) {
+    public void addMoreAdminUser(String id, String username, String password, String phone, String email, String
+            address) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "INSERT INTO user (id, username, password, phoneNumber, email, address, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -104,24 +131,23 @@ public class HomeAdminController {
         Connection connection = connectionJDBC.getConnection();
         String query = "SELECT * FROM user where userName = ?";
         try {
-            Statement statement = connection.createStatement();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
+                String id = resultSet.getString("userID");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
                 String role = resultSet.getString("role");
                 boolean status = resultSet.getBoolean("status");
-                userList.add(new User(id, username, phoneNumber, email, address, role, status));
+                User user = new User(id, username, phoneNumber, email, address, role, status);
+                userTable.getItems().add(user);
             }
-            userTable.setItems(userList);
-            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setColumn();
     }
 }
 
