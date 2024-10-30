@@ -34,14 +34,13 @@ public class LoginController {
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome admin " + username + "!");
                 changeSceneHomeAdmin();
             } else {
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome customers" + username + "!");
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome customer " + username + "!");
                 handleRegisterButton();
             }
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect username or password or account is disabled.");
         }
     }
-
 
     public String getUserRoleFromDB(String username) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
@@ -105,7 +104,8 @@ public class LoginController {
             passwordTextField.setVisible(false);
         }
     }
-    private void changeSceneHomeAdmin () {
+
+    private void changeSceneHomeAdmin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/HomeAdmin.fxml"));
             Parent root = loader.load();
@@ -117,7 +117,7 @@ public class LoginController {
         }
     }
 
-    private void showAlert (Alert.AlertType alertType, String title, String message){
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
