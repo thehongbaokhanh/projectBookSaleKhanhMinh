@@ -29,7 +29,7 @@
                 <TableColumn minWidth="100.0" prefWidth="126.0" text="Address" fx:id="addressColumn"/>
                 <TableColumn minWidth="100.0" prefWidth="126.0" text="Role" fx:id="roleColumn"/>
                 <TableColumn minWidth="100.0" prefWidth="126.0" text="Status" fx:id="statusColumn"/>
-                <TableColumn minWidth="100.0" prefWidth="126.0" text="Action" fx:id="actionColumn"/>
+                <TableColumn minWidth="100.0" prefWidth="226.0" text="Action" fx:id="actionColumn"/>
               </columns>
             </TableView>
             <ButtonBar buttonMinWidth="100.0" layoutX="59.0" layoutY="42.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="450.0">
@@ -40,21 +40,21 @@
                   <Button mnemonicParsing="false" text="HOME" />
               </buttons>
             </ButtonBar>
-            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="875.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="search" fitHeight="27.0" fitWidth="27.0" layoutX="875.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../icon/search.png" />
                </image>
             </ImageView>
-             <TextField layoutX="616.0" layoutY="47.0" prefHeight="30.0" prefWidth="241.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@CSS/HomeAdmin.css" />
+             <TextField layoutX="616.0" layoutY="47.0" prefHeight="30.0" prefWidth="241.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@CSS/HomeAdmin.css" fx:id="searchTextField" />
          </children>
         </AnchorPane>
       <AnchorPane prefHeight="700.0" prefWidth="280.0" style="-fx-background-color: rgba(222,222,222,0.96);">
          <children>
-                  <Button layoutX="65.0" layoutY="539.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Edit user information">
+                  <Button layoutX="65.0" layoutY="539.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Edit user information" fx:id="ShowEditUserButton" onAction="#handleEditUserButton">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button layoutX="90.0" layoutY="606.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #E54646; -fx-border-color: #363636; -fx-background-radius: 10; -fx-border-radius: 10;" text="Log out" textFill="WHITE">
+            <Button layoutX="90.0" layoutY="606.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #E54646; -fx-border-color: #363636; -fx-background-radius: 10; -fx-border-radius: 10;" text="Log out" onAction="#handleLogOutButton" fx:id="logOutButton" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
