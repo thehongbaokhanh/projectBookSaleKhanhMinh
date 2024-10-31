@@ -3,9 +3,9 @@ import java.sql.Connection;
 
 
 public class ConnectionJDBC {
-//     private String url = "jdbc:mysql://localhost:3306/booksalesmanager";
-//     private String username = "root";
-//     private String password = "Mot2ba4nam";
+//     private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+//     private static String username = "root";
+//     private static String password = "Mot2ba4nam";
   
     private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
     private static String username = "root";

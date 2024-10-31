@@ -4,6 +4,7 @@ import com.example.projectbooksalekhanhminh.User;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,28 +31,28 @@ public class HomeAdminController {
     private TableView<User> userTable;
 
     @FXML
-    private TableColumn<User, String> idColumn;
+    private TableColumn idColumn;
 
     @FXML
-    private TableColumn<User, String> usernameColumn;
+    private TableColumn usernameColumn;
 
     @FXML
-    private TableColumn<User, String> phoneNumberColumn;
+    private TableColumn phoneNumberColumn;
 
     @FXML
-    private TableColumn<User, String> emailColumn;
+    private TableColumn emailColumn;
 
     @FXML
-    private TableColumn<User, String> addressColumn;
+    private TableColumn addressColumn;
 
     @FXML
-    private TableColumn<User, String> roleColumn;
+    private TableColumn roleColumn;
 
     @FXML
-    private TableColumn<User, Boolean> statusColumn;
+    private TableColumn statusColumn;
 
     @FXML
-    private TableColumn<User, Void> actionColumn;
+    private TableColumn actionColumn;
 
     @FXML
     private TextField searchTextField;
@@ -60,7 +66,7 @@ public class HomeAdminController {
         if (searchTextField.getText().isEmpty()) {
             loadData();
             searchUserWithName();
-        }else {
+        } else {
             loadData();
         }
     }
@@ -247,96 +253,88 @@ public class HomeAdminController {
         });
     }
 
-
-
     private void loadData() {
         Connection connection = ConnectionJDBC.getConnection();
-
-        String query = "SELECT userID, userName, phoneNumber, email, address, role, status FROM user where role = 'Customer'";
+        String query = "SELECT * FROM user where role = 'Customer'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                String id = resultSet.getString("userID");
+                String id = resultSet.getString("userid");
                 String username = resultSet.getString("username");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
                 String role = resultSet.getString("role");
                 boolean status = resultSet.getBoolean("status");
-                User user = new User(id, username, phoneNumber, email, address, role, status);
-                userTable.getItems().add(user);
+                userList.add(new User(id, username, phoneNumber, email, address, role, status));
             }
-            System.out.println("Load data successfully");
+            userTable.setItems(userList);
+            connection.close();
+            setColumn();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setColumn();
     }
-
-
 
     public void changeStatus(String id, boolean status) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "UPDATE user SET status = ? WHERE userid = ?";
         try {
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setBoolean(1, status);
-                preparedStatement.setString(2, id);
-                preparedStatement.executeUpdate();
-                connection.close();
-                System.out.println("Change status successfully");
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setBoolean(1, status);
+            preparedStatement.setString(2, id);
+            preparedStatement.executeUpdate();
+            connection.close();
+            System.out.println("Change status successfully");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-//    public void addMoreAdminUser(String id, String username, String password, String phone, String email, String
-//            address) {
-//        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
-//        Connection connection = connectionJDBC.getConnection();
-//        String query = "INSERT INTO user (userid, username, password, phoneNumber, email, address, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setString(1, id);
-//            preparedStatement.setString(2, username);
-//            preparedStatement.setString(3, password);
-//            preparedStatement.setString(4, phone);
-//            preparedStatement.setString(5, email);
-//            preparedStatement.setString(6, address);
-//            preparedStatement.setString(7, "admin");
-//            preparedStatement.setBoolean(8, true);
-//            preparedStatement.executeUpdate();
-//            connection.close();
-//            System.out.println("Add more admin successfully");
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-    public void findUser(String username) {
+        public void addMoreAdminUser(String id, String username, String password, String phone, String email, String
+            address) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
-        String query = "SELECT * FROM user where userName = ?";
+        String query = "INSERT INTO user (userid, username, password, phoneNumber, email, address, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String id = resultSet.getString("userID");
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String email = resultSet.getString("email");
-                String address = resultSet.getString("address");
-                String role = resultSet.getString("role");
-                boolean status = resultSet.getBoolean("status");
-                User user = new User(id, username, phoneNumber, email, address, role, status);
-                userTable.getItems().add(user);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, password);
+            preparedStatement.setString(4, phone);
+            preparedStatement.setString(5, email);
+            preparedStatement.setString(6, address);
+            preparedStatement.setString(7, "admin");
+            preparedStatement.setBoolean(8, true);
+            preparedStatement.executeUpdate();
+            connection.close();
+            System.out.println("Add more admin successfully");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        setColumn();
+    }
+
+    public void handleLogout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Log out");
+        alert.setHeaderText("Do you want to log out?");
+        alert.setContentText("Are you sure?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+                Parent loginRoot = fxmlLoader.load();
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(loginRoot));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -347,18 +345,6 @@ public class HomeAdminController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/UserInformation.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ShowEditUserButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    @FXML
-    private Button logOutButton;
-
-    @FXML
-    public void handleLogOutButton() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) logOutButton.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -383,4 +369,3 @@ public class HomeAdminController {
         }
     }
 }
-
