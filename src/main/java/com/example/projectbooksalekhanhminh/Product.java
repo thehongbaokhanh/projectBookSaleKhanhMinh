@@ -1,17 +1,17 @@
 package com.example.projectbooksalekhanhminh;
 
-public class Book {
-    private String id;
+public class Product {
+    private int id;
     private String name;
     private String image;
     private String author;
     private int publishedYear;
     private String discription;
-    private int category;
-    private boolean price;
+    private String category;
+    private double price;
     private int stokeQuantity;
 
-    public Book(String id, String name, String image, String author, int publishedYear, String discription, int category, boolean price, int stokeQuantity) {
+    public Product(int id, String name, String image, String author, int publishedYear, String discription, String category, double price, int stokeQuantity) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -23,11 +23,11 @@ public class Book {
         this.stokeQuantity = stokeQuantity;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -71,19 +71,19 @@ public class Book {
         this.discription = discription;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public boolean isPrice() {
+    public double isPrice() {
         return price;
     }
 
-    public void setPrice(boolean price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
