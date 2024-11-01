@@ -76,7 +76,7 @@
                 </TableView>
             </children>
         </AnchorPane>
-      <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="280.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1000.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="280.0" style="-fx-background-color: Silver;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1000.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefHeight="150.0" prefWidth="280.0">
                <children>
