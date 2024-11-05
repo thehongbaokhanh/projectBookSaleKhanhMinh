@@ -37,7 +37,7 @@
                         </ButtonBar>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
                             <children>
-                                <TextField fx:id="searchTextField1" prefHeight="30.0" prefWidth="230.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@CSS/HomeAdmin.css">
+                                <TextField fx:id="searchTextField" prefHeight="30.0" prefWidth="230.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@CSS/HomeAdmin.css">
                                     <padding>
                                         <Insets left="25.0" />
                                     </padding>
@@ -45,7 +45,7 @@
                                         <Insets left="25.0" />
                                     </HBox.margin>
                                 </TextField>
-                                <ImageView fx:id="search1" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="search" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" >
                                     <image>
                                         <Image url="@../../../icon/search.png" />
                                     </image>
@@ -63,16 +63,15 @@
                 <TableView fx:id="productTable" layoutX="51.0" layoutY="154.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="125.0">
                     <columns>
                         <TableColumn fx:id="idColumn" minWidth="65.0" prefWidth="70.0" text="Product ID" />
-                        <TableColumn fx:id="nameColumn" minWidth="100.0" prefWidth="105.0" text="Product Name" />
-                        <TableColumn fx:id="imageColumn" minWidth="73.0" prefWidth="94.0" text="Image" />
-                        <TableColumn fx:id="authorColumn" minWidth="73.0" prefWidth="94.0" text="Author" />
-                        <TableColumn fx:id="publishedYearColumn" minWidth="99.0" prefWidth="124.0" text="Publication Year" />
-                        <TableColumn fx:id="discriptionColumn" minWidth="115.0" prefWidth="152.0" text="Discription" />
-                        <TableColumn fx:id="categoryColumn" prefWidth="122.0" text="Category" />
-                        <TableColumn fx:id="priceColumn" prefWidth="121.0" text="Price" />
-                        <TableColumn fx:id="actionColumn" prefWidth="104.0" text="Action" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="nameColumn" minWidth="125.0" prefWidth="105.0" text="Product Name" />
+                        <TableColumn fx:id="imageColumn" minWidth="100.0" prefWidth="94.0" text="Image" />
+                        <TableColumn fx:id="authorColumn" minWidth="75.0" prefWidth="94.0" text="Author" />
+                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="124.0" text="Publication Year" />
+                        <TableColumn fx:id="descriptionColumn" minWidth="115.0" prefWidth="152.0" text="Description" />
+                        <TableColumn fx:id="categoryColumn" prefWidth="125.0" text="Category" />
+                        <TableColumn fx:id="priceColumn" prefWidth="125.0" text="Price" />
+                        <TableColumn fx:id="stockQuantityColumn" prefWidth="105.0" text="Stock Quantity" />
+                        <TableColumn fx:id="actionColumn" prefWidth="105.0" text="Action" />
                     </columns>
                 </TableView>
             </children>

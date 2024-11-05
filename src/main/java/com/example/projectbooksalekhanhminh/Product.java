@@ -6,21 +6,21 @@ public class Product {
     private String image;
     private String author;
     private int publishedYear;
-    private String discription;
+    private String description;
     private String category;
     private double price;
-    private int stokeQuantity;
+    private int quantity;
 
-    public Product(int id, String name, String image, String author, int publishedYear, String discription, String category, double price, int stokeQuantity) {
+    public Product(int id, String name, String image, String author, int publishedYear, String description, String category, double price, int quantity) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.author = author;
         this.publishedYear = publishedYear;
-        this.discription = discription;
+        this.description = description;
         this.category = category;
         this.price = price;
-        this.stokeQuantity = stokeQuantity;
+        this.quantity =quantity;
     }
 
     public int getId() {
@@ -63,12 +63,12 @@ public class Product {
         this.publishedYear = publishedYear;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String discription) {
+        this.description = discription;
     }
 
     public String getCategory() {
@@ -87,12 +87,12 @@ public class Product {
         this.price = price;
     }
 
-    public int getStokeQuantity() {
-        return stokeQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setStokeQuantity(int stokeQuantity) {
-        this.stokeQuantity = stokeQuantity;
+    public void setQuantity(int stokeQuantity) {
+        this.quantity = stokeQuantity;
     }
 
     @Override
@@ -103,10 +103,10 @@ public class Product {
                 ", image='" + image + '\'' +
                 ", author='" + author + '\'' +
                 ", publishedYear=" + publishedYear +
-                ", discription='" + discription + '\'' +
+                ", discription='" + description + '\'' +
                 ", category=" + category +
                 ", price=" + price +
-                ", stokeQuantity=" + stokeQuantity +
+                ", stokeQuantity=" + quantity +
                 '}';
     }
 }
