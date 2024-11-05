@@ -36,26 +36,41 @@
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Text>
                      </children>
                      <opaqueInsets>
@@ -71,26 +86,41 @@
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
                         <Label text="Label">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
                         <Label text="Label">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
                         <Label text="Label">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
                         <Label text="Label">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
                      </children>
                      <opaqueInsets>
@@ -104,9 +134,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Edit user information">
+                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Edit user information">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
@@ -118,7 +148,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #E54646; -fx-border-color: #363636; -fx-background-radius: 10; -fx-border-radius: 10;" text="Log out" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -156,10 +186,22 @@
                <children>
                   <ButtonBar buttonMinWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="123.0">
                      <buttons>
-                        <Button mnemonicParsing="false" text="BILL" />
-                        <Button mnemonicParsing="false" text="ORDER" />
-                        <Button mnemonicParsing="false" text="PRODUCT" />
-                        <Button mnemonicParsing="false" text="HOME" />
+                        <Button mnemonicParsing="false" text="BILL">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" text="ORDER">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" text="PRODUCT">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" text="HOME">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
                      </buttons>
                      <HBox.margin>
                         <Insets left="50.0" />

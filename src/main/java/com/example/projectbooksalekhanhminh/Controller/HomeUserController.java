@@ -1,9 +1,20 @@
 package com.example.projectbooksalekhanhminh.Controller;
 
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.EventObject;
+import java.util.Optional;
 
 public class HomeUserController {
 
@@ -71,5 +82,26 @@ public class HomeUserController {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void handleLogout(ActionEvent actionEvent) {
+//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//        alert.setTitle("Log out");
+//        alert.setHeaderText("Do you want to log out?");
+//        alert.setContentText("Are you sure?");
+//
+//        Optional<ButtonType> result = alert.showAndWait();
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
+//            try {
+//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+//                Parent loginRoot = fxmlLoader.load();
+//
+//                EventObject event = null;
+//                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//                stage.setScene(new Scene(loginRoot));
+//                stage.show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
     }
 }

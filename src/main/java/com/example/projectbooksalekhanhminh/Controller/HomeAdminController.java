@@ -197,14 +197,12 @@ public class HomeAdminController {
         Dialog<User> infoDialog = new Dialog<>();
         infoDialog.setTitle("User Information");
 
-        // Các Label hiển thị thông tin của người dùng
         Label usernameLabel = new Label(user.getUsername());
         Label phoneLabel = new Label(user.getPhoneNumber());
         Label emailLabel = new Label(user.getEmail());
         Label addressLabel = new Label(user.getAddress());
         Label roleLabel = new Label(user.getRole());
 
-        // CheckBox cho phép thay đổi trạng thái của người dùng
         CheckBox statusCheckbox = new CheckBox("Active");
         statusCheckbox.setSelected(user.getStatus());
 
@@ -227,10 +225,8 @@ public class HomeAdminController {
         infoDialog.getDialogPane().setContent(grid);
         infoDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
-        // Xử lý khi hộp thoại đóng lại
         infoDialog.setResultConverter(dialogButton -> {
             if (dialogButton == ButtonType.OK) {
-                // Cập nhật trạng thái của User dựa trên trạng thái của CheckBox
                 user.setStatus(statusCheckbox.isSelected());
                 return user;
             }
@@ -239,7 +235,6 @@ public class HomeAdminController {
 
         Optional<User> result = infoDialog.showAndWait();
         result.ifPresent(updatedUser -> {
-            // Hiển thị hộp thoại xác nhận
             Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmationAlert.setTitle("Confirm Status Change");
             confirmationAlert.setHeaderText("Are you sure you want to change the status of this user?");
