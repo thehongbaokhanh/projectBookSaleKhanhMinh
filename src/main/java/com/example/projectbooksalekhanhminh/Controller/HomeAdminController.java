@@ -120,6 +120,7 @@ public class HomeAdminController {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 //        actionColumn.setCellFactory(col -> new TableCell<User, Void>() {
 //            private final Button changeStatusButton = new Button("Change Status User");
+//
 //            {
 //                changeStatusButton.setOnAction(event -> {
 //                    User user = getTableView().getItems().get(getIndex());
@@ -128,12 +129,13 @@ public class HomeAdminController {
 //            }
 //
 //            private final Button editButton = new Button("Edit User");
+//
 //            {
 //                editButton.setOnAction(event -> {
 //                    User user = getTableView().getItems().get(getIndex());
 //                    showEditDialog(user);
 //                });
 //            }
-//});
+//        });
     }
 }
