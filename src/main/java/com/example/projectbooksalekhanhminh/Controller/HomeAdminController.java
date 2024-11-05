@@ -58,13 +58,13 @@ public class HomeAdminController {
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
-    public void initialize() {
-        if (searchTextField.getText().isEmpty()) {
-            loadData();
-        } else {
-            loadData();
-        }
-    }
+//    public void initialize() {
+//        if (searchTextField.getText().isEmpty()) {
+//            loadData();
+//        } else {
+//            loadData();
+//        }
+//    }
 
     private void loadData() {
         Connection connection = ConnectionJDBC.getConnection();
