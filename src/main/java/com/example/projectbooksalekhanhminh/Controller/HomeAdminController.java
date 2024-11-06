@@ -137,24 +137,23 @@ public class HomeAdminController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
-//        imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
-//        imageColumn.setCellFactory(column -> new TableCell<Product, String>() {
-//
-//            private final ImageView imageView = new ImageView();
-//
-//            @Override
-//            protected void updateItem(String imagePath, boolean empty) {
-//                super.updateItem(imagePath, empty);
-//                if (empty || imagePath == null) {
-//                    setGraphic(null);
-//                } else {
-//                    imageView.setImage(new Image(imagePath));
-//                    imageView.setFitHeight(50); // Chiều cao của ảnh
-//                    imageView.setFitWidth(50);  // Chiều rộng của ảnh
-//                    setGraphic(imageView);
-//                }
-//            }
-//        });
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
+        imageColumn.setCellFactory(column -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String imagePath, boolean empty) {
+                super.updateItem(imagePath, empty);
+                if (empty || imagePath == null) {
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(new Image(imagePath));
+                    imageView.setFitHeight(50); // Chiều cao của ảnh
+                    imageView.setFitWidth(50);  // Chiều rộng của ảnh
+                    setGraphic(imageView);
+                }
+            }
+        });
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publishedYearColumn.setCellValueFactory(new PropertyValueFactory<>("publishedYear"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
