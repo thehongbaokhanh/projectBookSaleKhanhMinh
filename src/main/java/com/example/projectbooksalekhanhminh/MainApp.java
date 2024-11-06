@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(loader.load()));
-        primaryStage.setMaximized(true);
+        primaryStage.setScene(new Scene(loader.load(),1280,800));
+//        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }

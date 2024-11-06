@@ -1,33 +1,33 @@
 package com.example.projectbooksalekhanhminh;
 
-public class Book {
-    private String id;
+public class Product {
+    private int id;
     private String name;
     private String image;
     private String author;
     private int publishedYear;
-    private String discription;
-    private int category;
-    private boolean price;
-    private int stokeQuantity;
+    private String description;
+    private String category;
+    private double price;
+    private int quantity;
 
-    public Book(String id, String name, String image, String author, int publishedYear, String discription, int category, boolean price, int stokeQuantity) {
+    public Product(int id, String name, String image, String author, int publishedYear, String description, String category, double price, int quantity) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.author = author;
         this.publishedYear = publishedYear;
-        this.discription = discription;
+        this.description = description;
         this.category = category;
         this.price = price;
-        this.stokeQuantity = stokeQuantity;
+        this.quantity =quantity;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -63,36 +63,36 @@ public class Book {
         this.publishedYear = publishedYear;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String discription) {
+        this.description = discription;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public boolean isPrice() {
+    public double isPrice() {
         return price;
     }
 
-    public void setPrice(boolean price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getStokeQuantity() {
-        return stokeQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setStokeQuantity(int stokeQuantity) {
-        this.stokeQuantity = stokeQuantity;
+    public void setQuantity(int stokeQuantity) {
+        this.quantity = stokeQuantity;
     }
 
     @Override
@@ -103,10 +103,10 @@ public class Book {
                 ", image='" + image + '\'' +
                 ", author='" + author + '\'' +
                 ", publishedYear=" + publishedYear +
-                ", discription='" + discription + '\'' +
+                ", discription='" + description + '\'' +
                 ", category=" + category +
                 ", price=" + price +
-                ", stokeQuantity=" + stokeQuantity +
+                ", stokeQuantity=" + quantity +
                 '}';
     }
 }

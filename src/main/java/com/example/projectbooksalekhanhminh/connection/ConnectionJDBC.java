@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionJDBC {
-// private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+    // private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
 // private static String username = "root";
 // private static String password = "khanhanhanmiu";
     private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
@@ -28,14 +28,4 @@ public class ConnectionJDBC {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        Connection connection = ConnectionJDBC.getConnection();
-        if (connection != null) {
-            System.out.println("Connection successful!");
-        } else {
-            System.out.println("Connection failed.");
-        }
-    }
 }
-

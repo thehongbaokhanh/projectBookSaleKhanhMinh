@@ -15,234 +15,182 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="CENTER" prefHeight="800.0" prefWidth="1281.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox prefHeight="700.0" prefWidth="150.0" style="-fx-background-color: Silver;">
-         <children>
-            <HBox alignment="CENTER" prefHeight="150.0" prefWidth="280.0">
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../icon/userHome-icon.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER_RIGHT" prefHeight="165.0" prefWidth="50.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hi!">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets left="40.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="165.0" prefWidth="180.0">
-                     <children>
-                        <Label text="Label">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Edit user information">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="200.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #E54646; -fx-border-color: #363636; -fx-background-radius: 10; -fx-border-radius: 10;" text="Log out" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../icon/log-out-icon.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-         <HBox.margin>
-            <Insets bottom="100.0" />
-         </HBox.margin>
-      </VBox>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="950.0" style="-fx-background-color: rgba(222,222,222,0.96);">
-         <padding>
-            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-         </padding>
-         <children>
-            <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ButtonBar buttonMinWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="123.0">
-                     <buttons>
-                        <Button mnemonicParsing="false" text="BILL">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" text="ORDER">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" text="PRODUCT">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" text="HOME">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                     </buttons>
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </ButtonBar>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
-                     <children>
-                        <TextField fx:id="searchTextField1" prefHeight="30.0" prefWidth="230.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@CSS/HomeAdmin.css">
-                           <padding>
-                              <Insets left="25.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets left="25.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <ImageView fx:id="search1" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../icon/search.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.Controller.HomeAdminController">
+    <children>
+        <AnchorPane layoutX="310.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="945.0" style="-fx-background-color: rgba(222,222,222,0.96);" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+            <padding>
+                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <ButtonBar buttonMinWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="123.0">
+                            <buttons>
+                                <Button mnemonicParsing="false" text="BILL" />
+                                <Button mnemonicParsing="false" text="ORDER" />
+                                <Button mnemonicParsing="false" text="PRODUCT" />
+                                <Button mnemonicParsing="false" text="HOME" />
+                            </buttons>
+                            <HBox.margin>
+                                <Insets left="50.0" />
+                            </HBox.margin>
+                        </ButtonBar>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
+                            <children>
+                                <TextField fx:id="searchTextField" prefHeight="30.0" prefWidth="230.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@CSS/HomeAdmin.css">
+                                    <padding>
+                                        <Insets left="25.0" />
+                                    </padding>
+                                    <HBox.margin>
+                                        <Insets left="25.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <ImageView fx:id="search" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" >
+                                    <image>
+                                        <Image url="@../../../icon/search.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="15.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="100.0" />
+                            </HBox.margin>
+                        </HBox>
+                    </children>
+                </HBox>
+                <TableView fx:id="productTable" layoutX="51.0" layoutY="154.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="125.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" minWidth="65.0" prefWidth="70.0" text="Product ID" />
+                        <TableColumn fx:id="nameColumn" minWidth="125.0" prefWidth="105.0" text="Product Name" />
+                        <TableColumn fx:id="imageColumn" minWidth="100.0" prefWidth="94.0" text="Image" />
+                        <TableColumn fx:id="authorColumn" minWidth="75.0" prefWidth="94.0" text="Author" />
+                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="124.0" text="Publication Year" />
+                        <TableColumn fx:id="descriptionColumn" minWidth="115.0" prefWidth="152.0" text="Description" />
+                        <TableColumn fx:id="categoryColumn" prefWidth="125.0" text="Category" />
+                        <TableColumn fx:id="priceColumn" prefWidth="125.0" text="Price" />
+                        <TableColumn fx:id="stockQuantityColumn" prefWidth="105.0" text="Stock Quantity" />
+                        <TableColumn fx:id="actionColumn" prefWidth="105.0" text="Action" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="280.0" style="-fx-background-color: Silver;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1000.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="150.0" prefWidth="280.0">
+                    <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../icon/userHome-icon.png" />
+                            </image>
                         </ImageView>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                  </HBox>
-               </children>
-            </HBox>
-            <TableView fx:id="productTable" layoutX="51.0" layoutY="154.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="125.0">
-               <columns>
-                  <TableColumn fx:id="idColumn" minWidth="65.0" prefWidth="70.0" text="Product ID" />
-                  <TableColumn fx:id="usernameColumn" minWidth="100.0" prefWidth="105.0" text="Product Name" />
-                  <TableColumn fx:id="phoneNumberColumn" minWidth="73.0" prefWidth="94.0" text="Author" />
-                  <TableColumn fx:id="emailColumn" minWidth="99.0" prefWidth="124.0" text="Publication Year" />
-                  <TableColumn fx:id="addressColumn" minWidth="115.0" prefWidth="152.0" text="Description" />
-                  <TableColumn fx:id="roleColumn" prefWidth="122.0" text="Category" />
-                  <TableColumn fx:id="statusColumn" prefWidth="121.0" text="Price" />
-                  <TableColumn prefWidth="104.0" text="Stock Quantity" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-               </columns>
-            </TableView>
-         </children>
-         <HBox.margin>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </HBox.margin>
-      </AnchorPane>
-   </children>
-</HBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="165.0" prefWidth="50.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hi!">
+                                    <VBox.margin>
+                                        <Insets top="20.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Text>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Text>
+                            </children>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <HBox.margin>
+                                <Insets left="40.0" />
+                            </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="165.0" prefWidth="180.0">
+                            <children>
+                                <Label text="Label">
+                                    <VBox.margin>
+                                        <Insets top="20.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <Label text="Label">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <Label text="Label">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <Label text="Label">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <Label text="Label">
+                                    <VBox.margin>
+                                        <Insets top="15.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <HBox.margin>
+                                <Insets left="15.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Edit user information">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="200.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #E54646; -fx-border-color: #363636; -fx-background-radius: 10; -fx-border-radius: 10;" text="Log out" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../icon/log-out-icon.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
