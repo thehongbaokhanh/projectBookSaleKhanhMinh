@@ -10,6 +10,7 @@ public class Product {
     private String category;
     private double price;
     private int quantity;
+    private boolean status;
 
     public Product(int id, String name, String image, String author, int publishedYear, String description, String category, double price, int quantity) {
         this.id = id;
@@ -79,7 +80,7 @@ public class Product {
         this.category = category;
     }
 
-    public double isPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -93,6 +94,14 @@ public class Product {
 
     public void setQuantity(int stokeQuantity) {
         this.quantity = stokeQuantity;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
