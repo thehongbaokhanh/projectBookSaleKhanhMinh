@@ -5,7 +5,12 @@ import com.example.projectbooksalekhanhminh.User;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -13,7 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.Optional;
 
@@ -87,7 +94,8 @@ public class HomeAdminController {
                 String category = resultSet.getString("category");
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
-                Product product = new Product(id, name, image, author, publishedYear, description, category, price, stockQuantity);
+                boolean status = resultSet.getBoolean("status");
+                Product product = new Product(id, name, image, author, publishedYear, description, category, price, stockQuantity, status);
                 productTable.getItems().add(product);
             }
             connection.close();
@@ -165,7 +173,7 @@ public class HomeAdminController {
         stockQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         actionColumn.setCellValueFactory(new PropertyValueFactory<>(null));
         actionColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button editButton = new Button("Edit");
+            private final Button updateButton = new Button("Update Product");
             private final Button changeStatusButton = new Button("Change Status");
 
             @Override
@@ -174,7 +182,7 @@ public class HomeAdminController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    editButton.setOnAction(event -> {
+                    updateButton.setOnAction(event -> {
                         Product product = getTableView().getItems().get(getIndex());
                         showEditDialog(product);
                     });
@@ -183,8 +191,13 @@ public class HomeAdminController {
                         Product product = getTableView().getItems().get(getIndex());
                         showChangeStatusDialog(product);
                     });
+                    Product product = getTableView().getItems().get(getIndex());
+                    if (product.getStatus()) {
+                        setGraphic(new HBox(30, updateButton, changeStatusButton));
+                    } else {
+                        setGraphic(new HBox(30, updateButton));
+                    }
                 }
-                setGraphic(new HBox(30, editButton, changeStatusButton));
             }
         });
     }
@@ -210,6 +223,8 @@ public class HomeAdminController {
         TextField categoryField = new TextField();
         TextField priceField = new TextField();
         TextField quantityField = new TextField();
+        CheckBox statusField = new CheckBox();
+
 
         GridPane gridPane = new GridPane();
         gridPane.add(nameLabel, 0, 0);
@@ -248,77 +263,29 @@ public class HomeAdminController {
 
         Optional<Product> result = editDialog.showAndWait();
         if (result.isPresent()) {
-            productTable.getItems().set(productTable.getItems().indexOf(product), result.get());
             editProductInDB(product, product.getName(), product.getAuthor(), product.getImage(), product.getPublishedYear(), product.getDescription(), product.getCategory(), product.getPrice(), product.getQuantity());
+            loadData();
         }
     }
 
     private void showChangeStatusDialog(Product product) {
-        Dialog<Product> infoDialog = new Dialog<>();
-        infoDialog.setTitle("User Information");
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirm Status Change");
+        confirmationAlert.setHeaderText("Are you sure you want to change the status of this user?");
 
-        Label nameLabel = new Label("Name:");
-        nameLabel.setText(product.getName());
-        Label authorLabel = new Label("Author:");
-        authorLabel.setText(product.getAuthor());
-        Label publishedYearLabel = new Label("Published Year:");
-        publishedYearLabel.setText(String.valueOf(product.getPublishedYear()));
-        Label descriptionLabel = new Label("Description:");
-        descriptionLabel.setText(product.getDescription());
-        Label categoryLabel = new Label("Category:");
-        categoryLabel.setText(product.getCategory());
-        Label priceLabel = new Label("Price:");
-        priceLabel.setText(String.valueOf(product.getPrice()));
-        Label quantityLabel = new Label("Quantity:");
-        quantityLabel.setText(String.valueOf(product.getQuantity()));
-
-        CheckBox statusCheckbox = new CheckBox("Active");
-        statusCheckbox.setSelected(product.getStatus());
-
-        GridPane gridPane = new GridPane();
-        gridPane.add(nameLabel, 0, 0);
-        gridPane.add(authorLabel, 0, 1);
-        gridPane.add(publishedYearLabel, 0, 2);
-        gridPane.add(descriptionLabel, 0, 3);
-        gridPane.add(categoryLabel, 0, 4);
-        gridPane.add(priceLabel, 0, 5);
-        gridPane.add(quantityLabel, 0, 6);
-        gridPane.add(statusCheckbox, 1, 7);
-
-        infoDialog.getDialogPane().setContent(gridPane);
-        infoDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        infoDialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
-                product.setStatus(statusCheckbox.isSelected());
-                return product;
-            }
-            return null;
-        });
-
-        Optional<Product> result = infoDialog.showAndWait();
-        result.ifPresent(updatedProduct -> {
-            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmationAlert.setTitle("Confirm Status Change");
-            confirmationAlert.setHeaderText("Are you sure you want to change the status of this user?");
-            confirmationAlert.setContentText("Current status: " + (product.getStatus() ? "Active" : "Inactive"));
-
-            Optional<ButtonType> confirmationResult = confirmationAlert.showAndWait();
-            if (confirmationResult.isPresent() && confirmationResult.get() == ButtonType.OK) {
-                System.out.println(productList.toArray().length);
-                productTable.getItems().set(productTable.getItems().indexOf(product), result.get());
-                changeStatus(product.getId(), product.getStatus());
-            }
-        });
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            changeStatus(product.getId());
+        }
     }
 
-    public void changeStatus(int id, boolean status) {
+    public void changeStatus(int id) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "UPDATE products SET status = ? WHERE productID = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setBoolean(1, status);
+            preparedStatement.setBoolean(1, false);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
             connection.close();
@@ -347,6 +314,44 @@ public class HomeAdminController {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean checkStatusProduct(int id) {
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT status FROM products WHERE productID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getBoolean("status");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void handleLogout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Log out");
+        alert.setHeaderText("Do you want to log out?");
+        alert.setContentText("Are you sure?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+                Parent loginRoot = fxmlLoader.load();
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(loginRoot));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

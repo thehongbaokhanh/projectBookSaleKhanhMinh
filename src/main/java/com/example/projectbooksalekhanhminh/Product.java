@@ -12,6 +12,19 @@ public class Product {
     private int quantity;
     private boolean status;
 
+    public Product(int id, String name, String image, String author, int publishedYear, String description, String category, double price, int quantity, boolean status) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.author = author;
+        this.publishedYear = publishedYear;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.quantity =quantity;
+        this.status = status;
+    }
+
     public Product(int id, String name, String image, String author, int publishedYear, String description, String category, double price, int quantity) {
         this.id = id;
         this.name = name;

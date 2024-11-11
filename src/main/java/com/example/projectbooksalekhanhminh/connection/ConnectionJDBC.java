@@ -5,12 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionJDBC {
-    // private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
-// private static String username = "root";
-// private static String password = "khanhanhanmiu";
-    private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
-    private static String username = "root";
-    private static String password = "Mot2ba4nam";
+     private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+ private static String username = "root";
+ private static String password = "khanhanhanmiu";
+//    private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+//    private static String username = "root";
+//    private static String password = "Mot2ba4nam";
 
     public static Connection getConnection() {
         Connection connection = null;
