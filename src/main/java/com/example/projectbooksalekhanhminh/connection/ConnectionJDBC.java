@@ -1,29 +1,25 @@
 package com.example.projectbooksalekhanhminh.connection;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 
 public class ConnectionJDBC {
-    // private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
-// private static String username = "root";
-// private static String password = "khanhanhanmiu";
-    private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
-    private static String username = "root";
-    private static String password = "Mot2ba4nam";
+     private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+     private static String username = "root";
+     private static String password = "Mot2ba4nam";
+
+//    private static String url = "jdbc:mysql://localhost:3306/booksalesmanager";
+//    private static String username = "root";
+//    private static String password = "khanhanhanmiu";
+
 
     public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected successfully");
+            connection = java.sql.DriverManager.getConnection(url, username, password);
+            System.out.println("Connected");
             return connection;
-        } catch (ClassNotFoundException e) {
-            System.out.println("MySQL JDBC Driver not found.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Failed to connect to MySQL database.");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

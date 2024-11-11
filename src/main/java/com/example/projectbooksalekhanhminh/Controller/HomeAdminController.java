@@ -1,22 +1,29 @@
 package com.example.projectbooksalekhanhminh.Controller;
 
 import com.example.projectbooksalekhanhminh.Product;
-import com.example.projectbooksalekhanhminh.User;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class HomeAdminController {
 
     @FXML
     private TableView<Product> productTable;
+
     @FXML
     private TableColumn<Product, Integer> idColumn;
 
@@ -58,6 +65,7 @@ public class HomeAdminController {
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
+
     public void initialize() {
         if (searchTextField.getText().isEmpty()) {
             loadData();
@@ -85,7 +93,7 @@ public class HomeAdminController {
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 Product product = new Product(id, name, image, author, publishedYear, description, category, price, stockQuantity);
                 productTable.getItems().add(product);
-                }
+            }
             connection.close();
             setColumn();
         } catch (Exception e) {
@@ -148,8 +156,8 @@ public class HomeAdminController {
                     setGraphic(null);
                 } else {
                     imageView.setImage(new Image(imagePath));
-                    imageView.setFitHeight(50); // Chiều cao của ảnh
-                    imageView.setFitWidth(50);  // Chiều rộng của ảnh
+                    imageView.setFitHeight(100); // Chiều cao của ảnh
+                    imageView.setFitWidth(100);  // Chiều rộng của ảnh
                     setGraphic(imageView);
                 }
             }
@@ -179,5 +187,24 @@ public class HomeAdminController {
 //                });
 //            }
 //        });
+    }
+
+    public <Optional> void handleLogout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm logout");
+        alert.setHeaderText("Are you sure you want to log out?");
+
+        Optional result = (Optional) alert.showAndWait();
+        if (((java.util.Optional<?>) result).isPresent() && ((java.util.Optional<?>) result).get() == ButtonType.OK) {
+            try {
+                Parent loginView = FXMLLoader.load(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+                Scene loginScene = new Scene(loginView);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(loginScene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

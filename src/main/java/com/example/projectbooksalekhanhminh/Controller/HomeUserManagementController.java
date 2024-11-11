@@ -293,7 +293,7 @@ public class HomeUserManagementController {
         }
     }
 
-        public void addMoreAdminUser(String id, String username, String password, String phone, String email, String
+    public void addMoreAdminUser(String id, String username, String password, String phone, String email, String
             address) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
@@ -342,7 +342,7 @@ public class HomeUserManagementController {
 
     @FXML
     public void handleEditUserButton() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/UserInformation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/EditUserInformation.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ShowEditUserButton.getScene().getWindow();
         stage.setScene(new Scene(root));
