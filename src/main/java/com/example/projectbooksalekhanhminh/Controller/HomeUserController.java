@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +32,7 @@ public class HomeUserController {
             preparedStatement.executeUpdate();
             System.out.println("Update information successful!");
             connection.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -47,7 +48,7 @@ public class HomeUserController {
             preparedStatement.executeUpdate();
             System.out.println("Update password successful!");
             connection.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -62,7 +63,7 @@ public class HomeUserController {
             preparedStatement.executeUpdate();
             System.out.println("Update stokeQuantity successful!");
             connection.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,30 +78,31 @@ public class HomeUserController {
             boolean result = preparedStatement.executeQuery().next();
             connection.close();
             return result;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
     public void handleLogout(ActionEvent actionEvent) {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setTitle("Log out");
-//        alert.setHeaderText("Do you want to log out?");
-//        alert.setContentText("Are you sure?");
-//
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            try {
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
-//                Parent loginRoot = fxmlLoader.load();
-//
-//                EventObject event = null;
-//                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                stage.setScene(new Scene(loginRoot));
-//                stage.show();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Log out");
+        alert.setHeaderText("Do you want to log out?");
+        alert.setContentText("Are you sure?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+                Parent loginRoot = fxmlLoader.load();
+
+                EventObject event = null;
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(loginRoot));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
