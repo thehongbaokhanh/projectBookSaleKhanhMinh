@@ -1,4 +1,4 @@
-package com.example.projectbooksalekhanhminh.Controller;
+package com.example.projectbooksalekhanhminh.Admin;
 
 import com.example.projectbooksalekhanhminh.Class.Product;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
@@ -7,11 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;

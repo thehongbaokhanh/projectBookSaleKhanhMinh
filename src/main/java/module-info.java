@@ -12,4 +12,6 @@ module com.example.projectbooksalekhanhminh {
     exports com.example.projectbooksalekhanhminh;
     exports com.example.projectbooksalekhanhminh.Class;
     opens com.example.projectbooksalekhanhminh.Class to javafx.fxml;
+    exports com.example.projectbooksalekhanhminh.Admin;
+    opens com.example.projectbooksalekhanhminh.Admin to javafx.fxml;
 }
