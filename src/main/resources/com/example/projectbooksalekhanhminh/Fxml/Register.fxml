@@ -32,7 +32,7 @@
                 <children>
                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image url="@../../../icon/user-icon.png" />
+                            <Image url="@../../../../icon/user_icon.png" />
                         </image>
                         <HBox.margin>
                             <Insets right="10.0" />
@@ -95,7 +95,7 @@
                             <Insets right="10.0" />
                         </HBox.margin>
                     </ImageView>
-                    <TextField prefHeight="35.0" prefWidth="300.0" promptText="Phone number" style="-fx-border-color: rgba(0,128,0,0.7);" />
+                    <TextField fx:id="phoneField" prefHeight="35.0" prefWidth="300.0" promptText="Phone number" style="-fx-border-color: rgba(0,128,0,0.7);" />
                 </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="60.0">
@@ -159,7 +159,7 @@
                             <Font size="14.0" />
                         </font>
                     </Text>
-                    <Hyperlink onAction="#handleLoginLink" prefHeight="23.0" prefWidth="45.0" text="Login" textFill="#00ffbb">
+                    <Hyperlink onAction="#handleLoginLink" prefHeight="23.0" prefWidth="45.0" text="Login" textFill="AQUA">
                         <font>
                             <Font size="14.0" />
                         </font>

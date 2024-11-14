@@ -95,7 +95,7 @@
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../../icon/user_1077114.png"/>
+                                        <Image url="@../../../../icon/user_icon.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -104,7 +104,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="120.0">
                     <children>
-                        <Hyperlink text="Log out" textFill="#1c1c1c" onAction="#handleLogout">
+                        <Hyperlink onAction="#handleLogout" text="Log out" textFill="#1c1c1c">
                             <font>
                                 <Font name="System Bold" size="18.0"/>
                             </font>
@@ -112,7 +112,8 @@
                         <Button mnemonicParsing="false"
                                 style="-fx-border-color: transparent; -fx-background-color: transparent;">
                             <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#handleLogout"
+                                           pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../../../../icon/log-out.png"/>
                                     </image>
@@ -144,14 +145,16 @@
                     <children>
                         <ButtonBar buttonMinWidth="100.0">
                             <buttons>
-                                <Button onAction="#handleAddProduct" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
+                                <Button mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="35.0"
+                                        prefWidth="150.0"
                                         style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;"
                                         text="ADD PRODUCT">
                                     <font>
                                         <Font name="System Bold" size="14.0"/>
                                     </font>
                                 </Button>
-                                <Button onAction="#handleEditProduct" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
+                                <Button mnemonicParsing="false" onAction="#handleEditProduct" prefHeight="35.0"
+                                        prefWidth="150.0"
                                         style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;"
                                         text="EDIT PRODUCT">
                                     <font>
@@ -160,6 +163,16 @@
                                 </Button>
                             </buttons>
                         </ButtonBar>
+                        <Button mnemonicParsing="false"
+                                style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/refresh-icon.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
                     </children>
                 </HBox>
                 <TableView fx:id="productTable" prefHeight="697.0" prefWidth="950.0">
@@ -168,7 +181,8 @@
                         <TableColumn fx:id="imageColumn" minWidth="100.0" prefWidth="110.0" text="Image"/>
                         <TableColumn fx:id="nameColumn" minWidth="115.0" prefWidth="115.0" text="Product Name"/>
                         <TableColumn fx:id="authorColumn" minWidth="75.0" prefWidth="100.0" text="Author"/>
-                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="90.0" text="Publication Year"/>
+                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="90.0"
+                                     text="Publication Year"/>
                         <TableColumn fx:id="descriptionColumn" minWidth="115.0" prefWidth="310.0" text="Description"/>
                         <TableColumn fx:id="categoryColumn" prefWidth="70.0" text="Category"/>
                         <TableColumn fx:id="priceColumn" prefWidth="70.0" text="Price"/>
@@ -188,16 +202,11 @@
             <children>
                 <VBox alignment="CENTER" prefWidth="280.0" style="-fx-background-color: rgba(37,54,70,0.8);">
                     <children>
-                        <Button mnemonicParsing="false"
-                                style="-fx-border-color: transparent; -fx-background-color: transparent;">
-                            <graphic>
-                                <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../icon/BookWorld.png"/>
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
+                        <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../icon/BookWorld.png"/>
+                            </image>
+                        </ImageView>
                     </children>
                 </VBox>
                 <HBox alignment="CENTER" minWidth="-Infinity" prefWidth="1000.0">
