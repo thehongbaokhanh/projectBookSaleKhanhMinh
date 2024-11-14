@@ -32,7 +32,7 @@
                         <graphic>
                             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../../../icon/user_1077114.png" />
+                                    <Image url="@../../../../icon/user_icon.png" />
                                 </image>
                             </ImageView>
                         </graphic>
@@ -100,7 +100,7 @@
                             <Font size="14.0" />
                         </font>
                     </Text>
-                    <Hyperlink fx:id="registerLink" onAction="#handleRegisterButton" text="Sign Up" textFill="#00ffbb">
+                    <Hyperlink fx:id="registerLink" onAction="#handleRegisterButton" text="Sign Up" textFill="AQUA">
                         <font>
                             <Font size="14.0" />
                         </font>
