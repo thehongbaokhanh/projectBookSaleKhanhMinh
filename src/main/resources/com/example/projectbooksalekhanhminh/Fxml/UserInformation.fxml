@@ -23,7 +23,7 @@
             </Text>
             <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../icon/userHome-icon.png" />
+                  <Image url="@../../../../icon/userHome-icon.png" />
                </image>
                <VBox.margin>
                   <Insets top="10.0" />

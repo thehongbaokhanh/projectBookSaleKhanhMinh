@@ -1,23 +1,22 @@
 package com.example.projectbooksalekhanhminh.Controller;
 
-import com.example.projectbooksalekhanhminh.Product;
-import com.example.projectbooksalekhanhminh.User;
+import com.example.projectbooksalekhanhminh.Class.Product;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -56,10 +55,10 @@ public class HomeAdminController {
     private TableColumn<Product, Integer> stockQuantityColumn;
 
     @FXML
-    private TableColumn<Product, Void> actionColumn;
+    private TableColumn<Product, Boolean> statusColumn;
 
     @FXML
-    private TableColumn addColumn;
+    private TableColumn<Product, Void> actionColumn;
 
     @FXML
     private TextField searchTextField;
@@ -134,7 +133,6 @@ public class HomeAdminController {
                         productTable.getItems().add(product);
                     }
                     connection.close();
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -159,8 +157,8 @@ public class HomeAdminController {
                     setGraphic(null);
                 } else {
                     imageView.setImage(new Image(imagePath));
-                    imageView.setFitHeight(50); // Chiều cao của ảnh
-                    imageView.setFitWidth(50);  // Chiều rộng của ảnh
+                    imageView.setFitHeight(100);
+                    imageView.setFitWidth(100);
                     setGraphic(imageView);
                 }
             }
@@ -170,42 +168,15 @@ public class HomeAdminController {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         stockQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        actionColumn.setCellValueFactory(new PropertyValueFactory<>(null));
-        actionColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button updateButton = new Button("Update Product");
-            private final Button changeStatusButton = new Button("Change Status");
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    updateButton.setOnAction(event -> {
-                        Product product = getTableView().getItems().get(getIndex());
-                        showEditDialog(product);
-                    });
-
-                    changeStatusButton.setOnAction(event -> {
-                        Product product = getTableView().getItems().get(getIndex());
-                        showChangeStatusDialog(product);
-                    });
-                    Product product = getTableView().getItems().get(getIndex());
-                    if (product.getStatus()) {
-                        setGraphic(new HBox(30, updateButton, changeStatusButton));
-                    } else {
-                        setGraphic(new HBox(30, updateButton));
-                    }
-                }
-            }
-        });
     }
 
-    public void showEditDialog(Product product) {
+    public void showEditDialog() {
         Dialog<Product> editDialog = new Dialog<>();
         editDialog.setTitle("Update information of Product");
 
+        Label idLabel = new Label("ID:");
         Label nameLabel = new Label("Name:");
         Label authorLabel = new Label("Author:");
         Label imageLabel = new Label("Image:");
@@ -214,7 +185,9 @@ public class HomeAdminController {
         Label categoryLabel = new Label("Category:");
         Label priceLabel = new Label("Price:");
         Label quantityLabel = new Label("Quantity:");
+        Label statusLabel = new Label("Status:");
 
+        TextField idField = new TextField();
         TextField nameField = new TextField();
         TextField authorField = new TextField();
         TextField imageField = new TextField();
@@ -227,28 +200,35 @@ public class HomeAdminController {
 
 
         GridPane gridPane = new GridPane();
-        gridPane.add(nameLabel, 0, 0);
-        gridPane.add(nameField, 1, 0);
-        gridPane.add(authorLabel, 0, 1);
-        gridPane.add(authorField, 1, 1);
-        gridPane.add(imageLabel, 0, 2);
-        gridPane.add(imageField, 1, 2);
-        gridPane.add(publishedYearLabel, 0, 3);
-        gridPane.add(publishedYearField, 1, 3);
-        gridPane.add(descriptionLabel, 0, 4);
-        gridPane.add(descriptionField, 1, 4);
-        gridPane.add(categoryLabel, 0, 5);
-        gridPane.add(categoryField, 1, 5);
-        gridPane.add(priceLabel, 0, 6);
-        gridPane.add(priceField, 1, 6);
-        gridPane.add(quantityLabel, 0, 7);
-        gridPane.add(quantityField, 1, 7);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.add(idLabel, 0, 0);
+        gridPane.add(idField, 1, 0);
+        gridPane.add(nameLabel, 0, 1);
+        gridPane.add(nameField, 1, 1);
+        gridPane.add(authorLabel, 0, 2);
+        gridPane.add(authorField, 1, 2);
+        gridPane.add(imageLabel, 0, 3);
+        gridPane.add(imageField, 1, 3);
+        gridPane.add(publishedYearLabel, 0, 4);
+        gridPane.add(publishedYearField, 1, 4);
+        gridPane.add(descriptionLabel, 0, 5);
+        gridPane.add(descriptionField, 1, 5);
+        gridPane.add(categoryLabel, 0, 6);
+        gridPane.add(categoryField, 1, 6);
+        gridPane.add(priceLabel, 0, 7);
+        gridPane.add(priceField, 1, 7);
+        gridPane.add(quantityLabel, 0, 8);
+        gridPane.add(quantityField, 1, 8);
+        gridPane.add(statusLabel, 0, 9);
+        gridPane.add(statusField, 1, 9);
 
         editDialog.getDialogPane().setContent(gridPane);
         editDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
+        Product product = new Product();
         editDialog.setResultConverter(buttonType -> {
             if (buttonType == ButtonType.OK) {
+                product.setId(Integer.parseInt(idField.getText()));
                 product.setName(nameField.getText());
                 product.setAuthor(authorField.getText());
                 product.setImage(imageField.getText());
@@ -257,13 +237,14 @@ public class HomeAdminController {
                 product.setCategory(categoryField.getText());
                 product.setPrice(Double.parseDouble(priceField.getText()));
                 product.setQuantity(Integer.parseInt(quantityField.getText()));
+                product.setStatus(statusField.isSelected());
             }
             return product;
         });
 
         Optional<Product> result = editDialog.showAndWait();
         if (result.isPresent()) {
-            editProductInDB(product, product.getName(), product.getAuthor(), product.getImage(), product.getPublishedYear(), product.getDescription(), product.getCategory(), product.getPrice(), product.getQuantity());
+            editProductInDB(product, product.getName(), product.getAuthor(), product.getImage(), product.getPublishedYear(), product.getDescription(), product.getCategory(), product.getPrice(), product.getQuantity(), product.getStatus());
             loadData();
         }
     }
@@ -295,8 +276,8 @@ public class HomeAdminController {
         }
     }
 
-    public void editProductInDB(Product product, String name, String author, String image, int publishedYear, String description, String category, double price, int quantity) {
-        String query = "UPDATE products SET productName = ?, author = ?, picture = ?, publicationYear = ?, description = ?, category = ?, price = ?, stockQuantity = ? WHERE productID = ?";
+    public void editProductInDB(Product product, String name, String author, String image, int publishedYear, String description, String category, double price, int quantity, boolean status) {
+        String query = "UPDATE products SET productName = ?, author = ?, picture = ?, publicationYear = ?, description = ?, category = ?, price = ?, stockQuantity = ? , status = ? WHERE productID = ?";
 
         try {
             Connection connection = ConnectionJDBC.getConnection();
@@ -309,7 +290,8 @@ public class HomeAdminController {
             preparedStatement.setString(6, category);
             preparedStatement.setDouble(7, price);
             preparedStatement.setInt(8, quantity);
-            preparedStatement.setInt(9, product.getId());
+            preparedStatement.setBoolean(9, status);
+            preparedStatement.setInt(10, product.getId());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (SQLException e) {
@@ -343,7 +325,7 @@ public class HomeAdminController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/Login.fxml"));
                 Parent loginRoot = fxmlLoader.load();
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -352,6 +334,120 @@ public class HomeAdminController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    private void handleEditProduct() {
+        showEditDialog();
+    }
+
+    private void changeSceneHomeAdmin(Button button) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/HomeAdmin.fxml"));
+            Parent loginRoot = fxmlLoader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(loginRoot));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleAddProduct() {
+        showAddDialog();
+    }
+
+    public void showAddDialog() {
+        Dialog<Product> editDialog = new Dialog<>();
+        editDialog.setTitle("Add information to data base");
+
+        Label nameLabel = new Label("Name:");
+        Label authorLabel = new Label("Author:");
+        Label imageLabel = new Label("Image:");
+        Label publishedYearLabel = new Label("Published Year:");
+        Label descriptionLabel = new Label("Description:");
+        Label categoryLabel = new Label("Category:");
+        Label priceLabel = new Label("Price:");
+        Label quantityLabel = new Label("Quantity:");
+        Label statusLabel = new Label("Status:");
+
+        TextField nameField = new TextField();
+        TextField authorField = new TextField();
+        TextField imageField = new TextField();
+        TextField publishedYearField = new TextField();
+        TextField descriptionField = new TextField();
+        TextField categoryField = new TextField();
+        TextField priceField = new TextField();
+        TextField quantityField = new TextField();
+        CheckBox statusField = new CheckBox();
+
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.add(nameLabel, 0, 0);
+        gridPane.add(nameField, 1, 0);
+        gridPane.add(authorLabel, 0, 1);
+        gridPane.add(authorField, 1, 1);
+        gridPane.add(imageLabel, 0, 2);
+        gridPane.add(imageField, 1, 2);
+        gridPane.add(publishedYearLabel, 0, 3);
+        gridPane.add(publishedYearField, 1, 3);
+        gridPane.add(descriptionLabel, 0, 4);
+        gridPane.add(descriptionField, 1, 4);
+        gridPane.add(categoryLabel, 0, 5);
+        gridPane.add(categoryField, 1, 5);
+        gridPane.add(priceLabel, 0, 6);
+        gridPane.add(priceField, 1, 6);
+        gridPane.add(quantityLabel, 0, 7);
+        gridPane.add(quantityField, 1, 7);
+        gridPane.add(statusLabel, 0, 8);
+        gridPane.add(statusField, 1, 8);
+
+        editDialog.getDialogPane().setContent(gridPane);
+        editDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        Product product = new Product();
+        editDialog.setResultConverter(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                product.setName(nameField.getText());
+                product.setAuthor(authorField.getText());
+                product.setImage(imageField.getText());
+                product.setPublishedYear(Integer.parseInt(publishedYearField.getText()));
+                product.setDescription(descriptionField.getText());
+                product.setCategory(categoryField.getText());
+                product.setPrice(Double.parseDouble(priceField.getText()));
+                product.setQuantity(Integer.parseInt(quantityField.getText()));
+                product.setStatus(statusField.isSelected());
+            }
+            return product;
+        });
+
+        Optional<Product> result = editDialog.showAndWait();
+        if (result.isPresent()) {
+            addProductToDB( product.getName(), product.getAuthor(), product.getImage(), product.getPublishedYear(), product.getDescription(), product.getCategory(), product.getPrice(), product.getQuantity(), product.getStatus());
+            loadData();
+        }
+    }
+    public void addProductToDB( String productName, String authorName, String image, int publishedYear, String description, String category, double price, int quantity, boolean status) {
+        String query = "INSERT INTO products (productName, picture, author, publicationYear, description, category, price, stockQuantity, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            Connection connection = ConnectionJDBC.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productName);
+            preparedStatement.setString(2, image);
+            preparedStatement.setString(3, authorName);
+            preparedStatement.setInt(4, publishedYear);
+            preparedStatement.setString(5, description);
+            preparedStatement.setString(6, category);
+            preparedStatement.setDouble(7, price);
+            preparedStatement.setInt(8, quantity);
+            preparedStatement.setBoolean(9, status);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

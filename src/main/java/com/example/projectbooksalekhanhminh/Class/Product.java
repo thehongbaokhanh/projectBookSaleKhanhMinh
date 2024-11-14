@@ -1,4 +1,4 @@
-package com.example.projectbooksalekhanhminh;
+package com.example.projectbooksalekhanhminh.Class;
 
 public class Product {
     private int id;
@@ -35,6 +35,10 @@ public class Product {
         this.category = category;
         this.price = price;
         this.quantity =quantity;
+    }
+
+    public Product() {
+
     }
 
     public int getId() {

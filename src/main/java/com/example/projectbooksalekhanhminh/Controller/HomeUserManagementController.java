@@ -1,6 +1,6 @@
 package com.example.projectbooksalekhanhminh.Controller;
 
-import com.example.projectbooksalekhanhminh.User;
+import com.example.projectbooksalekhanhminh.Class.User;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -320,7 +320,7 @@ public class HomeUserManagementController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Login.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/Login.fxml"));
                 Parent loginRoot = fxmlLoader.load();
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -337,7 +337,7 @@ public class HomeUserManagementController {
 
     @FXML
     public void handleEditUserButton() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/EditUserInformation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/EditUserInformation.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ShowEditUserButton.getScene().getWindow();
         stage.setScene(new Scene(root));

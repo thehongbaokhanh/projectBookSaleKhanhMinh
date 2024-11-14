@@ -29,7 +29,7 @@
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../icon/home-icon.png"/>
+                                        <Image url="@../../../../icon/home-icon.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -51,7 +51,7 @@
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../icon/book-icon.png"/>
+                                        <Image url="@../../../../icon/book-icon.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -73,7 +73,7 @@
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../icon/shoppingCart-icon.png"/>
+                                        <Image url="@../../../../icon/shoppingCart-icon.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -95,7 +95,7 @@
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../icon/user_1077114.png"/>
+                                        <Image url="@../../../../icon/user_1077114.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -114,7 +114,7 @@
                             <graphic>
                                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../icon/log-out.png"/>
+                                        <Image url="@../../../../icon/log-out.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -144,23 +144,16 @@
                     <children>
                         <ButtonBar buttonMinWidth="100.0">
                             <buttons>
-                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
+                                <Button onAction="#handleAddProduct" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
                                         style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;"
                                         text="ADD PRODUCT">
                                     <font>
                                         <Font name="System Bold" size="14.0"/>
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
+                                <Button onAction="#handleEditProduct" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
                                         style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;"
                                         text="EDIT PRODUCT">
-                                    <font>
-                                        <Font name="System Bold" size="14.0"/>
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0"
-                                        style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;"
-                                        text="UPDATE">
                                     <font>
                                         <Font name="System Bold" size="14.0"/>
                                     </font>
@@ -171,15 +164,17 @@
                 </HBox>
                 <TableView fx:id="productTable" prefHeight="697.0" prefWidth="950.0">
                     <columns>
-                        <TableColumn fx:id="idColumn" minWidth="52.0" prefWidth="52.0" text="Ordinal number"/>
-                        <TableColumn fx:id="imageColumn" minWidth="100.0" prefWidth="128.0" text="Image"/>
+                        <TableColumn fx:id="idColumn" minWidth="55.0" prefWidth="50.0" text="Ordinal number"/>
+                        <TableColumn fx:id="imageColumn" minWidth="100.0" prefWidth="110.0" text="Image"/>
                         <TableColumn fx:id="nameColumn" minWidth="115.0" prefWidth="115.0" text="Product Name"/>
-                        <TableColumn fx:id="authorColumn" minWidth="75.0" prefWidth="94.0" text="Author"/>
-                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="91.0" text="Publication Year"/>
-                        <TableColumn fx:id="descriptionColumn" minWidth="115.0" prefWidth="142.0" text="Description"/>
-                        <TableColumn fx:id="categoryColumn" prefWidth="73.0" text="Category"/>
+                        <TableColumn fx:id="authorColumn" minWidth="75.0" prefWidth="100.0" text="Author"/>
+                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="90.0" text="Publication Year"/>
+                        <TableColumn fx:id="descriptionColumn" minWidth="115.0" prefWidth="310.0" text="Description"/>
+                        <TableColumn fx:id="categoryColumn" prefWidth="70.0" text="Category"/>
                         <TableColumn fx:id="priceColumn" prefWidth="70.0" text="Price"/>
-                        <TableColumn fx:id="stockQuantityColumn" prefWidth="79.0" text="Stock Quantity"/>
+                        <TableColumn fx:id="stockQuantityColumn" prefWidth="80.0" text="Stock Quantity"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status"/>
+                        <TableColumn fx:id="actionColumn" prefWidth="75.0" text="Action"/>
                     </columns>
                     <VBox.margin>
                         <Insets bottom="25.0" left="25.0" right="25.0"/>
@@ -198,7 +193,7 @@
                             <graphic>
                                 <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../icon/BookWorld.png"/>
+                                        <Image url="@../../../../icon/BookWorld.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -209,7 +204,7 @@
                     <children>
                         <TextField fx:id="searchTextField" prefHeight="40.0" prefWidth="270.0" promptText="Search"
                                    style="-fx-background-color: white; -fx-border-color: #d7d7d7; -fx-border-radius: 20; -fx-background-radius: 20;"
-                                   styleClass="shadow" stylesheets="@CSS/HomeAdmin.css">
+                                   styleClass="shadow" stylesheets="@../CSS/HomeAdmin.css">
                             <padding>
                                 <Insets left="25.0"/>
                             </padding>
@@ -217,7 +212,7 @@
                         <ImageView fx:id="search" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
                                    preserveRatio="true">
                             <image>
-                                <Image url="@../../../icon/search.png"/>
+                                <Image url="@../../../../icon/search.png"/>
                             </image>
                             <HBox.margin>
                                 <Insets left="15.0"/>

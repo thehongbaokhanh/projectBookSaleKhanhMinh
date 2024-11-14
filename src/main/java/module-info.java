@@ -10,4 +10,6 @@ module com.example.projectbooksalekhanhminh {
     exports com.example.projectbooksalekhanhminh.connection;
     opens com.example.projectbooksalekhanhminh.connection to javafx.fxml;
     exports com.example.projectbooksalekhanhminh;
+    exports com.example.projectbooksalekhanhminh.Class;
+    opens com.example.projectbooksalekhanhminh.Class to javafx.fxml;
 }
