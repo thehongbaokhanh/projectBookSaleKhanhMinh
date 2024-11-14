@@ -17,7 +17,6 @@ public class ConnectionJDBC {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = java.sql.DriverManager.getConnection(url, username, password);
-            System.out.println("Connected");
             return connection;
         } catch (Exception e) {
             e.printStackTrace();

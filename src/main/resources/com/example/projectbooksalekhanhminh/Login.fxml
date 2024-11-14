@@ -100,7 +100,7 @@
                             <Font size="14.0" />
                         </font>
                     </Text>
-                    <Hyperlink fx:id="registerLink" onAction="#handleRegisterButton" text="Sign Up" textFill="#00ffbb">
+                    <Hyperlink fx:id="registerLink" onAction="#handleRegisterButton" text="Sign Up" textFill="AQUA">
                         <font>
                             <Font size="14.0" />
                         </font>
