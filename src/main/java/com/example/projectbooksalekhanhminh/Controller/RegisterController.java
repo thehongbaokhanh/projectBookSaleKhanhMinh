@@ -70,7 +70,7 @@ public class RegisterController {
     @FXML
     private void handleLoginLink() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/FXML/Login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));

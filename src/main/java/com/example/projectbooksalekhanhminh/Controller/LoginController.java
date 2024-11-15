@@ -82,7 +82,7 @@ public class LoginController {
     @FXML
     private void handleRegisterButton() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/Register.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/FXML/Register.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -107,7 +107,7 @@ public class LoginController {
 
     private void changeSceneHomeAdmin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/HomeAdmin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/FXML/HomeAdmin.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));

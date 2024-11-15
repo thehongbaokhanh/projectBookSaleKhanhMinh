@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-image: url(https://xuongnoithatdep.com/upload/images/ke-sach-dep-don-gian-6.png);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectbooksalekhanhminh.Admin.HomeAdminController">
+
+    <left>
+        <VBox prefWidth="280.0" style="-fx-background-color: rgba(255,245,238,0.85);" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="120.0">
+                    <children>
+                        <Hyperlink text="USER" textFill="#1c1c1c">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="25.0" />
+                            </HBox.margin>
+                        </Hyperlink>
+                        <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/user_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="120.0">
+                    <children>
+                        <Hyperlink text="PRODUCTS" textFill="#1c1c1c">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="25.0" />
+                            </HBox.margin>
+                        </Hyperlink>
+                        <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/book-icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="120.0">
+                    <children>
+                        <Hyperlink text="ORDERS" textFill="#1c1c1c">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="25.0" />
+                            </HBox.margin>
+                        </Hyperlink>
+                        <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/shoppingCart-icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="120.0">
+                    <children>
+                        <Hyperlink text="LIST USERS" textFill="#1c1c1c">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="25.0" />
+                            </HBox.margin>
+                        </Hyperlink>
+                        <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/group.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="120.0">
+                    <children>
+                        <Hyperlink onAction="#handleLogout" text="Log out" textFill="#1c1c1c">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Hyperlink>
+                        <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/log-out.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <HBox.margin>
+                                <Insets top="3.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="250.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="100.0" />
+            </BorderPane.margin>
+        </VBox>
+    </left>
+    <center>
+        <VBox prefHeight="650.0" prefWidth="969.0" style="-fx-background-color: rgba(255,245,238,0.85);" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets left="25.0" top="25.0" />
+            </BorderPane.margin>
+            <children>
+                <HBox alignment="CENTER" prefHeight="200.0" prefWidth="975.0">
+                    <children>
+                        <ButtonBar buttonMinWidth="100.0">
+                            <buttons>
+                                <Button mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="35.0" prefWidth="150.0" style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;" text="ADD PRODUCT">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#handleEditProduct" prefHeight="35.0" prefWidth="150.0" style="-fx-border-color: #C0C0C0; -fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #00FF66;" text="EDIT PRODUCT">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Button>
+                            </buttons>
+                        </ButtonBar>
+                        <Button onAction="#handleRefresh" mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView  fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/refresh-icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <TableView fx:id="productTable" prefHeight="697.0" prefWidth="950.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" minWidth="55.0" prefWidth="50.0" text="Ordinal number" />
+                        <TableColumn fx:id="imageColumn" minWidth="100.0" prefWidth="110.0" text="Image" />
+                        <TableColumn fx:id="nameColumn" minWidth="115.0" prefWidth="115.0" text="Product Name" />
+                        <TableColumn fx:id="authorColumn" minWidth="75.0" prefWidth="100.0" text="Author" />
+                        <TableColumn fx:id="publishedYearColumn" minWidth="40.0" prefWidth="90.0" text="Publication Year" />
+                        <TableColumn fx:id="descriptionColumn" minWidth="115.0" prefWidth="310.0" text="Description" />
+                        <TableColumn fx:id="categoryColumn" prefWidth="70.0" text="Category" />
+                        <TableColumn fx:id="priceColumn" prefWidth="70.0" text="Price" />
+                        <TableColumn fx:id="stockQuantityColumn" prefWidth="80.0" text="Stock Quantity" />
+                        <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="actionColumn" prefWidth="75.0" text="Action" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets bottom="25.0" left="25.0" right="25.0" />
+                    </VBox.margin>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+    <top>
+        <HBox prefHeight="125.0" style="-fx-background-color: rgba(108,123,139,0.9);" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" prefWidth="280.0" style="-fx-background-color: rgba(37,54,70,0.8);">
+                    <children>
+                        <Button mnemonicParsing="false" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../icon/BookWorld.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+                <HBox alignment="CENTER" minWidth="-Infinity" prefWidth="1000.0">
+                    <children>
+                        <TextField fx:id="searchTextField" prefHeight="40.0" prefWidth="270.0" promptText="Search" style="-fx-background-color: white; -fx-border-color: #d7d7d7; -fx-border-radius: 20; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../CSS/HomeAdmin.css">
+                            <padding>
+                                <Insets left="25.0" />
+                            </padding>
+                        </TextField>
+                        <ImageView fx:id="search" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../icon/search.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="15.0" />
+                            </HBox.margin>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+    </top>
+</BorderPane>

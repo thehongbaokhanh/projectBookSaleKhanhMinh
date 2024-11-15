@@ -64,12 +64,15 @@ public class HomeAdminController {
     @FXML
     private ImageView search;
 
+    @FXML
+    private ImageView refreshButton;
+
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
     public void initialize() {
         if (searchTextField.getText().isEmpty()) {
             loadData();
-            searchUserWithName();
+            searchProductWithName();
         } else {
             loadData();
         }
@@ -102,7 +105,7 @@ public class HomeAdminController {
         }
     }
 
-    private void searchUserWithName() {
+    private void searchProductWithName() {
         String query = "SELECT productID, productName, picture, author, publicationYear, description, category, price, stockQuantity FROM products WHERE productName LIKE ?";
         search.setOnMouseClicked(event -> {
             String searchText = searchTextField.getText();
@@ -170,8 +173,39 @@ public class HomeAdminController {
         stockQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     }
 
-    public void showEditDialog() {
+    public Product findProductByID(int id){
+        String query = "SELECT productName, picture, author, publicationYear, description, category, price, stockQuantity, status FROM products WHERE productID LIKE ?";
+        Product product = null;
+        try {
+            Connection connection = ConnectionJDBC.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String name = resultSet.getString("productName");
+                String image = resultSet.getString("picture");
+                String author = resultSet.getString("author");
+                int publishedYear = resultSet.getInt("publicationYear");
+                String description = resultSet.getString("description");
+                String category = resultSet.getString("category");
+                double price = resultSet.getDouble("price");
+                int quantity = resultSet.getInt("stockQuantity");
+                boolean status = resultSet.getBoolean("status");
+                product = new Product(id, name, image, author, publishedYear, description, category, price, quantity, status);
+
+            }
+            connection.close();
+            return product;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
+    public void showEditDialog(int id) {
         Dialog<Product> editDialog = new Dialog<>();
+        Product product = findProductByID(id);
         editDialog.setTitle("Update information of Product");
 
         Label idLabel = new Label("ID:");
@@ -185,17 +219,17 @@ public class HomeAdminController {
         Label quantityLabel = new Label("Quantity:");
         Label statusLabel = new Label("Status:");
 
-        TextField idField = new TextField();
-        TextField nameField = new TextField();
-        TextField authorField = new TextField();
-        TextField imageField = new TextField();
-        TextField publishedYearField = new TextField();
-        TextField descriptionField = new TextField();
-        TextField categoryField = new TextField();
-        TextField priceField = new TextField();
-        TextField quantityField = new TextField();
+        TextField idField = new TextField(String.valueOf(product.getId()));
+        TextField nameField = new TextField(product.getName());
+        TextField authorField = new TextField(product.getAuthor());
+        TextField imageField = new TextField(product.getImage());
+        TextField publishedYearField = new TextField(String.valueOf(product.getPublishedYear()));
+        TextField descriptionField = new TextField(product.getDescription());
+        TextField categoryField = new TextField(product.getCategory());
+        TextField priceField = new TextField(String.valueOf(product.getPrice()));
+        TextField quantityField = new TextField(String.valueOf(product.getQuantity()));
         CheckBox statusField = new CheckBox();
-
+        statusField.setSelected(product.getStatus());
 
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -223,29 +257,32 @@ public class HomeAdminController {
 
         editDialog.getDialogPane().setContent(gridPane);
         editDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        Product product = new Product();
+
+        Product newProduct = new Product();
         editDialog.setResultConverter(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                product.setId(Integer.parseInt(idField.getText()));
-                product.setName(nameField.getText());
-                product.setAuthor(authorField.getText());
-                product.setImage(imageField.getText());
-                product.setPublishedYear(Integer.parseInt(publishedYearField.getText()));
-                product.setDescription(descriptionField.getText());
-                product.setCategory(categoryField.getText());
-                product.setPrice(Double.parseDouble(priceField.getText()));
-                product.setQuantity(Integer.parseInt(quantityField.getText()));
-                product.setStatus(statusField.isSelected());
+                newProduct.setId(Integer.parseInt(idField.getText()));
+                newProduct.setName(nameField.getText());
+                newProduct.setAuthor(authorField.getText());
+                newProduct.setImage(imageField.getText());
+                newProduct.setPublishedYear(Integer.parseInt(publishedYearField.getText()));
+                newProduct.setDescription(descriptionField.getText());
+                newProduct.setCategory(categoryField.getText());
+                newProduct.setPrice(Double.parseDouble(priceField.getText()));
+                newProduct.setQuantity(Integer.parseInt(quantityField.getText()));
+                newProduct.setStatus(statusField.isSelected());
             }
-            return product;
+            return newProduct;
         });
 
         Optional<Product> result = editDialog.showAndWait();
         if (result.isPresent()) {
-            editProductInDB(product, product.getName(), product.getAuthor(), product.getImage(), product.getPublishedYear(), product.getDescription(), product.getCategory(), product.getPrice(), product.getQuantity(), product.getStatus());
+            editProductInDB(newProduct, newProduct.getName(), newProduct.getAuthor(), newProduct.getImage(), newProduct.getPublishedYear(), newProduct.getDescription(), newProduct.getCategory(), newProduct.getPrice(), newProduct.getQuantity(), newProduct.getStatus());
             loadData();
         }
     }
+
+
 
     private void showChangeStatusDialog(Product product) {
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -323,7 +360,7 @@ public class HomeAdminController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/Login.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/FXML/Login.fxml"));
                 Parent loginRoot = fxmlLoader.load();
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -337,12 +374,44 @@ public class HomeAdminController {
 
     @FXML
     private void handleEditProduct() {
-        showEditDialog();
+        chooseTheID();
+    }
+
+    public void chooseTheID() {
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Choose the ID of the product you want to edit");
+        confirmationAlert.setHeaderText("Enter the ID here:");
+
+        TextField idField = new TextField();
+        idField.setPromptText("Product ID");
+
+        GridPane contentPane = new GridPane();
+        contentPane.setHgap(10);
+        contentPane.setVgap(10);
+        contentPane.add(new Label("Product ID:"), 0, 0);
+        contentPane.add(idField, 1, 0);
+
+        confirmationAlert.getDialogPane().setContent(contentPane);
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                int id = Integer.parseInt(idField.getText().trim());
+                showEditDialog(id);
+            } catch (NumberFormatException e) {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Invalid Input");
+                errorAlert.setHeaderText(null);
+                errorAlert.setContentText("Please enter a valid numeric ID.");
+                errorAlert.showAndWait();
+            }
+        }
+
     }
 
     private void changeSceneHomeAdmin(Button button) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/Fxml/HomeAdmin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/FXML/HomeAdmin.fxml"));
             Parent loginRoot = fxmlLoader.load();
             Stage stage = (Stage) button.getScene().getWindow();
             stage.setScene(new Scene(loginRoot));
@@ -447,5 +516,11 @@ public class HomeAdminController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleRefresh() {
+        productTable.getItems().clear();
+        loadData();
     }
 }
