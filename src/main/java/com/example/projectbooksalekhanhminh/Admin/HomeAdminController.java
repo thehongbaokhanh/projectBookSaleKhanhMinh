@@ -314,9 +314,10 @@ public class HomeAdminController {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "UPDATE products SET status = ? WHERE productID = ?";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setBoolean(1, false);
+            preparedStatement.setBoolean(1, !checkStatusProduct(id));
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
             connection.close();
@@ -512,6 +513,7 @@ public class HomeAdminController {
             loadData();
         }
     }
+
     public void addProductToDB( String productName, String authorName, String image, int publishedYear, String description, String category, double price, int quantity, boolean status) {
         String query = "INSERT INTO products (productName, picture, author, publicationYear, description, category, price, stockQuantity, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {

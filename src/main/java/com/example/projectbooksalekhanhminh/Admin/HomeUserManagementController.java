@@ -1,5 +1,6 @@
 package com.example.projectbooksalekhanhminh.Admin;
 
+import com.example.projectbooksalekhanhminh.Class.Product;
 import com.example.projectbooksalekhanhminh.Class.User;
 import com.example.projectbooksalekhanhminh.connection.ConnectionJDBC;
 import javafx.collections.FXCollections;
@@ -35,6 +36,9 @@ public class HomeUserManagementController {
 
     @FXML
     private TableColumn usernameColumn;
+
+    @FXML
+    private TableColumn passwordColumn;
 
     @FXML
     private TableColumn phoneNumberColumn;
@@ -74,6 +78,7 @@ public class HomeUserManagementController {
     private void setColumn() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -81,18 +86,11 @@ public class HomeUserManagementController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         actionColumn.setCellFactory(col -> new TableCell<User, Void>() {
             private final Button changeStatusButton = new Button("Change Status User");
+
             {
                 changeStatusButton.setOnAction(event -> {
                     User user = getTableView().getItems().get(getIndex());
                     showChangeStatusDialog(user);
-                });
-            }
-
-            private final Button editButton = new Button("Edit User");
-            {
-                editButton.setOnAction(event -> {
-                    User user = getTableView().getItems().get(getIndex());
-                    showEditDialog(user);
                 });
             }
 
@@ -102,14 +100,14 @@ public class HomeUserManagementController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(new HBox(30, editButton, changeStatusButton));
+                    setGraphic(new HBox(30, changeStatusButton));
                 }
             }
         });
     }
 
     private void searchUserWithName() {
-        String query = "SELECT userID, userName, phoneNumber, email, address, role, status FROM user WHERE role = 'Customer' AND userName LIKE ?";
+        String query = "SELECT userID, userName, password, phoneNumber, email, address, role, status FROM user WHERE role = 'Customer' AND userName LIKE ?";
         search.setOnMouseClicked(event -> {
             String searchText = searchTextField.getText();
             if (!searchText.isEmpty()) {
@@ -126,12 +124,13 @@ public class HomeUserManagementController {
                     while (resultSet.next()) {
                         String id = resultSet.getString("userID");
                         String username = resultSet.getString("userName");
+                        String password = resultSet.getString("password");
                         String phoneNumber = resultSet.getString("phoneNumber");
                         String email = resultSet.getString("email");
                         String address = resultSet.getString("address");
                         String role = resultSet.getString("role");
                         boolean status = resultSet.getBoolean("status");
-                        User user = new User(id, username, phoneNumber, email, address, role, status);
+                        User user = new User(id, username, password, phoneNumber, email, address, role, status);
                         userTable.getItems().add(user);
                     }
                     connection.close();
@@ -146,106 +145,142 @@ public class HomeUserManagementController {
         });
     }
 
+    public User findUserByID(String id){
+        String query = "SELECT userName, password, phoneNumber, email, address, role, status FROM user WHERE userID LIKE ?";
+        User user = null;
+        try {
+            Connection connection = ConnectionJDBC.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-    private void showEditDialog(User user) {
+            while (resultSet.next()) {
+                String username = resultSet.getString("userName");
+                String password = resultSet.getString("password");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                String role = resultSet.getString("role");
+                boolean status = resultSet.getBoolean("status");
+                user = new User(id, username, password, phoneNumber, email, address, role, status);
+            }
+            connection.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public void showEditDialog(String id) {
         Dialog<User> editDialog = new Dialog<>();
-        editDialog.setTitle("Update information of User");
+        User user = findUserByID(id);
+        editDialog.setTitle("Update information of Product");
 
-        TextField usernameField = new TextField(user.getUsername());
-        TextField phoneField = new TextField(user.getPhoneNumber());
+        Label idLabel = new Label("ID:");
+        Label usernameLabel = new Label("Username:");
+        Label passwordLabel = new Label("Password:");
+        Label phoneNumberLabel = new Label("Phone Number:");
+        Label emailLabel = new Label("Email:");
+        Label addressLabel = new Label("Address:");
+        Label roleLabel = new Label("Role:");
+        Label statusLabel = new Label("Status:");
+
+        Label idField = new Label(String.valueOf(user.getId()));
+        TextField userNameField = new TextField(user.getUsername());
+        TextField passwordField = new TextField(user.getPassword());
+        TextField phoneNumberField = new TextField(user.getPhoneNumber());
         TextField emailField = new TextField(user.getEmail());
         TextField addressField = new TextField(user.getAddress());
         TextField roleField = new TextField(user.getRole());
 
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(usernameField, 1, 0);
-        grid.add(new Label("Phone Number:"), 0, 1);
-        grid.add(phoneField, 1, 1);
-        grid.add(new Label("Email:"), 0, 2);
-        grid.add(emailField, 1, 2);
-        grid.add(new Label("Address:"), 0, 3);
-        grid.add(addressField, 1, 3);
-        grid.add(new Label("Role:"), 0, 4);
-        grid.add(roleField, 1, 4);
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.add(idLabel, 0, 0);
+        gridPane.add(idField, 1, 0);
+        gridPane.add(usernameLabel, 0, 1);
+        gridPane.add(userNameField, 1, 1);
+        gridPane.add(passwordLabel, 0, 2);
+        gridPane.add(passwordField, 1, 2);
+        gridPane.add(phoneNumberLabel, 0, 3);
+        gridPane.add(phoneNumberField, 1, 3);
+        gridPane.add(emailLabel, 0, 4);
+        gridPane.add(emailField, 1, 4);
+        gridPane.add(addressLabel, 0, 5);
+        gridPane.add(addressField, 1, 5);
+        gridPane.add(roleLabel, 0, 6);
+        gridPane.add(roleField, 1, 6);
 
-        editDialog.getDialogPane().setContent(grid);
+        editDialog.getDialogPane().setContent(gridPane);
         editDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
-        editDialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
-                user.setUsername(usernameField.getText());
-                user.setEmail(emailField.getText());
-                user.setPhoneNumber(phoneField.getText());
-                user.setEmail(emailField.getText());
-                user.setAddress(addressField.getText());
-                user.setRole("Customer");
-                return user;
+        User newUser = new User();
+        editDialog.setResultConverter(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                newUser.setId(idField.getText());
+                newUser.setUsername(userNameField.getText());
+                newUser.setPassword(passwordField.getText());
+                newUser.setPhoneNumber(phoneNumberField.getText());
+                newUser.setEmail(emailField.getText());
+                newUser.setAddress(addressField.getText());
+                newUser.setRole(roleField.getText());
             }
-            return null;
+            return newUser;
         });
+
         Optional<User> result = editDialog.showAndWait();
         if (result.isPresent()) {
-            userTable.getItems().set(userTable.getItems().indexOf(user), result.get());
+            setInforUserInDB(id, newUser.getUsername(), newUser.getPassword(), newUser.getPhoneNumber(), newUser.getEmail(), newUser.getAddress());
         }
-        setInforUserInDB(user.getId(), user.getUsername(), user.getPassword(), user.getPhoneNumber(), user.getEmail(), user.getAddress());
+    }
+
+    public void chooseTheID() {
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Choose the ID of the user you want to Update");
+        confirmationAlert.setHeaderText("Enter the ID here:");
+
+        TextField idField = new TextField();
+        idField.setPromptText("User ID");
+
+        GridPane contentPane = new GridPane();
+        contentPane.setHgap(10);
+        contentPane.setVgap(10);
+        contentPane.add(new Label("User ID:"), 0, 0);
+        contentPane.add(idField, 1, 0);
+
+        confirmationAlert.getDialogPane().setContent(contentPane);
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                int id = Integer.parseInt(idField.getText().trim());
+                showEditDialog(generateIDByNumber(id));
+            } catch (NumberFormatException e) {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Invalid Input");
+                errorAlert.setHeaderText(null);
+                errorAlert.setContentText("Please enter a valid numeric ID.");
+                errorAlert.showAndWait();
+            }
+        }
+
+    }
+
+    @FXML
+    private void handleEditUser() {
+        chooseTheID();
     }
 
     private void showChangeStatusDialog(User user) {
-        Dialog<User> infoDialog = new Dialog<>();
-        infoDialog.setTitle("User Information");
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirm Status Change");
+        confirmationAlert.setHeaderText("Are you sure you want to change the status of this user?");
 
-        Label usernameLabel = new Label(user.getUsername());
-        Label phoneLabel = new Label(user.getPhoneNumber());
-        Label emailLabel = new Label(user.getEmail());
-        Label addressLabel = new Label(user.getAddress());
-        Label roleLabel = new Label(user.getRole());
-
-        CheckBox statusCheckbox = new CheckBox("Active");
-        statusCheckbox.setSelected(user.getStatus());
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(usernameLabel, 1, 0);
-        grid.add(new Label("Phone Number:"), 0, 1);
-        grid.add(phoneLabel, 1, 1);
-        grid.add(new Label("Email:"), 0, 2);
-        grid.add(emailLabel, 1, 2);
-        grid.add(new Label("Address:"), 0, 3);
-        grid.add(addressLabel, 1, 3);
-        grid.add(new Label("Role:"), 0, 4);
-        grid.add(roleLabel, 1, 4);
-        grid.add(new Label("Status:"), 0, 5);
-        grid.add(statusCheckbox, 1, 5);
-
-        infoDialog.getDialogPane().setContent(grid);
-        infoDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        infoDialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
-                user.setStatus(statusCheckbox.isSelected());
-                return user;
-            }
-            return null;
-        });
-
-        Optional<User> result = infoDialog.showAndWait();
-        result.ifPresent(updatedUser -> {
-            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmationAlert.setTitle("Confirm Status Change");
-            confirmationAlert.setHeaderText("Are you sure you want to change the status of this user?");
-            confirmationAlert.setContentText("Current status: " + (user.getStatus() ? "Active" : "Inactive"));
-
-            Optional<ButtonType> confirmationResult = confirmationAlert.showAndWait();
-            if (confirmationResult.isPresent() && confirmationResult.get() == ButtonType.OK) {
-                userTable.getItems().set(userTable.getItems().indexOf(user), updatedUser);
-                changeStatus(user.getId(), user.getStatus());
-            }
-        });
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            changeStatus(user.getId());
+        }
     }
 
     private void loadData() {
@@ -255,14 +290,15 @@ public class HomeUserManagementController {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                String id = resultSet.getString("userid");
-                String username = resultSet.getString("username");
+                String id = resultSet.getString("userID");
+                String username = resultSet.getString("userName");
+                String password = resultSet.getString("password");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
                 String role = resultSet.getString("role");
                 boolean status = resultSet.getBoolean("status");
-                userList.add(new User(id, username, phoneNumber, email, address, role, status));
+                userList.add(new User(id, username,password , phoneNumber, email, address, role, status));
             }
             userTable.setItems(userList);
             connection.close();
@@ -272,13 +308,30 @@ public class HomeUserManagementController {
         }
     }
 
-    public void changeStatus(String id, boolean status) {
+    public boolean checkStatusUser(String id) {
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT status FROM user WHERE userID = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getBoolean("status");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void changeStatus(String id) {
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "UPDATE user SET status = ? WHERE userid = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setBoolean(1, status);
+            preparedStatement.setBoolean(1, !checkStatusUser(id));
             preparedStatement.setString(2, id);
             preparedStatement.executeUpdate();
             connection.close();
@@ -288,8 +341,9 @@ public class HomeUserManagementController {
         }
     }
 
-    public void addMoreAdminUser(String id, String username, String password, String phone, String email, String
-            address) {
+    public void addMoreUser( String username, String password, String phone, String email, String role, String
+            address, boolean status) {
+        String id = generateID();
         ConnectionJDBC connectionJDBC = new ConnectionJDBC();
         Connection connection = connectionJDBC.getConnection();
         String query = "INSERT INTO user (userid, username, password, phoneNumber, email, address, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -301,11 +355,10 @@ public class HomeUserManagementController {
             preparedStatement.setString(4, phone);
             preparedStatement.setString(5, email);
             preparedStatement.setString(6, address);
-            preparedStatement.setString(7, "admin");
-            preparedStatement.setBoolean(8, true);
+            preparedStatement.setString(7, role);
+            preparedStatement.setBoolean(8, status);
             preparedStatement.executeUpdate();
             connection.close();
-            System.out.println("Add more admin successfully");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -332,16 +385,73 @@ public class HomeUserManagementController {
         }
     }
 
+
     @FXML
     private Button ShowEditUserButton;
 
     @FXML
-    public void handleEditUserButton() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectbooksalekhanhminh/FXML/EditUserInformation.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ShowEditUserButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void handleAddUser() throws IOException {
+        showAddDialog();
+    }
+
+    public void showAddDialog() {
+        Dialog<User> editDialog = new Dialog<>();
+        editDialog.setTitle("Add information to data base");
+
+        Label nameLabel = new Label("Name:");
+        Label passwordLabel = new Label("Password:");
+        Label phoneNumberLabel = new Label("Phone Number:");
+        Label emailLabel = new Label("Email:");
+        Label addressLabel = new Label("Address:");
+        Label roleLabel = new Label("Role:");
+        Label statusLabel = new Label("Status:");
+
+        TextField nameField = new TextField();
+        TextField passwordField = new TextField();
+        TextField phoneNumberField = new TextField();
+        TextField emailField = new TextField();
+        TextField addressField = new TextField();
+        TextField roleField = new TextField();
+        CheckBox statusField = new CheckBox();
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.add(nameLabel, 0, 0);
+        gridPane.add(nameField, 1, 0);
+        gridPane.add(passwordLabel, 0, 1);
+        gridPane.add(passwordField, 1, 1);
+        gridPane.add(phoneNumberLabel, 0, 2);
+        gridPane.add(phoneNumberField, 1, 2);
+        gridPane.add(emailLabel, 0, 3);
+        gridPane.add(emailField, 1, 3);
+        gridPane.add(addressLabel, 0, 4);
+        gridPane.add(addressField, 1, 4);
+        gridPane.add(roleLabel, 0, 5);
+        gridPane.add(roleField, 1, 5);
+        gridPane.add(statusLabel, 0, 6);
+        gridPane.add(statusField, 1, 6);
+
+        editDialog.getDialogPane().setContent(gridPane);
+        editDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        User user = new User();
+        editDialog.setResultConverter(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                user.setUsername(nameField.getText());
+                user.setPassword(passwordField.getText());
+                user.setPhoneNumber(phoneNumberField.getText());
+                user.setEmail(emailField.getText());
+                user.setAddress(addressField.getText());
+                user.setRole(roleField.getText());
+                user.setStatus(statusField.isSelected());
+            }
+            return user;
+        });
+
+        Optional<User> result = editDialog.showAndWait();
+        if (result.isPresent()) {
+            addMoreUser( user.getUsername(), user.getPassword(), user.getPhoneNumber(), user.getEmail(), user.getRole(), user.getAddress(), user.getStatus());
+        }
     }
 
     public void setInforUserInDB(String id, String username, String password, String phone, String email, String address) {
@@ -362,5 +472,42 @@ public class HomeUserManagementController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    private void handleRefresh() {
+        userTable.getItems().clear();
+        loadData();
+    }
+
+    private final String PREFIX = "CM";
+    private final int ID_LENGTH = 5;
+
+    public String generateID() {
+        String numberPart = String.format("%0" + ID_LENGTH + "d", checkTheNumberOfUser() + 1);
+        return PREFIX + numberPart;
+    }
+
+    public String generateIDByNumber(int number) {
+        String numberPart = String.format("%0" + ID_LENGTH + "d", number);
+        return PREFIX + numberPart;
+    }
+
+    public int checkTheNumberOfUser() {
+        int numberOfUsers = 0;
+        ConnectionJDBC connectionJDBC = new ConnectionJDBC();
+        Connection connection = connectionJDBC.getConnection();
+        String query = "SELECT COUNT(*) FROM user";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                numberOfUsers = resultSet.getInt(1);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return numberOfUsers;
     }
 }

@@ -34,6 +34,17 @@ public class User {
         this.status = status;
     }
 
+    public User(String id, String username, String password, String phoneNumber, String email, String address, String role, boolean status) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+        this.status = status;
+    }
+
     public String getId() {
         return id;
     }
