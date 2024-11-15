@@ -171,6 +171,23 @@ public class HomeAdminController {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         stockQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        actionColumn.setCellFactory(column -> new TableCell<>() {
+            private final Button changeStatusButton = new Button("Change the status");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(changeStatusButton);
+                    changeStatusButton.setOnAction(event -> {
+                        Product product = getTableView().getItems().get(getIndex());
+                        showChangeStatusDialog(product);
+                    });
+                }
+            }
+        });
     }
 
     public Product findProductByID(int id){
@@ -281,8 +298,6 @@ public class HomeAdminController {
             loadData();
         }
     }
-
-
 
     private void showChangeStatusDialog(Product product) {
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
